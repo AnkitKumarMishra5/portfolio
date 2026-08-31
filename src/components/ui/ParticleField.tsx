@@ -11,6 +11,9 @@ export function ParticleField({ className = "" }: { className?: string }) {
     const canvas = canvasRef.current;
     if (!canvas) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // A per-frame canvas sim competing with touch scrolling costs more than
+    // it adds on phones; the aurora carries the hero there.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;

@@ -56,19 +56,10 @@ type Stat = {
   suffix?: string;
   label: string;
   wide?: boolean;
-  full?: boolean;
 };
 
 export const stats: Stat[] = [
-  { value: 6, suffix: "+", label: "years in production engineering", wide: true },
-  {
-    value: 80,
-    prefix: "75-",
-    suffix: "%",
-    label: "faster API response times on critical endpoints",
-    wide: true,
-  },
-  { value: 1000, suffix: "+", label: "developers mentored" },
+  { value: 6, suffix: "+", label: "years in production engineering" },
   { value: 2, label: "promotions in 12 months" },
   {
     value: 50,
@@ -84,8 +75,10 @@ export const stats: Stat[] = [
     value: 2,
     label:
       "squads run as de facto product owner, owning product and tech together",
-    full: true,
+    wide: true,
   },
+  { value: 50, suffix: "+", label: "live courses taught" },
+  { value: 1000, suffix: "+", label: "developers mentored" },
 ];
 
 export const heroStats = [
@@ -805,6 +798,124 @@ export const sourceFiles: SourceFile[] = [
   "surfaces": ["web", "iOS", "Android"],
   "ledger": "double entry, posted in one transaction",
   "result": "a single subscription state, whatever the customer paid with"
+}`,
+  },
+  {
+    folder: "work",
+    name: "kyc.json",
+    cmd: "onboarding verify --region auto",
+    out: [
+      "[net]   resolving applicant region ...",
+      "[ok]    region          resolved",
+      "[ok]    provider        selected by region",
+      "[ok]    documents       pass",
+      "[ok]    liveness        pass",
+      "[ok]    sanctions       clear (watchlists + PEP)",
+      "[done]  approved, account opened",
+    ],
+    blurb: "Onboarding went from one market to global users at Vested Finance.",
+    code: `{
+  "problem": "Onboarding only worked for a single market.",
+  "built": [
+    "alternate KYC provider integrations",
+    "region-aware compliance and verification flows"
+  ],
+  "checks": ["documents", "liveness", "sanctions", "watchlists + PEP"],
+  "outcome": "global onboarding, unlocking international expansion",
+  "constraint": "live investor funds, every change audited"
+}`,
+  },
+  {
+    folder: "projects",
+    name: "crypto-trading.json",
+    cmd: "swap --quote SOL/USDC",
+    out: [
+      "[net]   fetching Jupiter quote ...",
+      "[ok]    quote           received",
+      "[ok]    transaction     built unsigned, server-side",
+      "[ok]    signature       Privy wallet, in the browser",
+      "[ok]    broadcast       RPC, confirmed on-chain",
+      "[done]  settled on mainnet, not a simulator",
+    ],
+    blurb: "A Solana trading terminal that executes real swaps on mainnet.",
+    code: `{
+  "name": "Crypto Trading App",
+  "what": "a Solana terminal that settles on mainnet",
+  "execution": "Jupiter quotes, unsigned versioned transactions",
+  "signing": "Privy embedded wallet, API keys stay server-side",
+  "safety": ["mint authority", "freeze authority", "liquidity depth", "pair age"],
+  "database": "none, market state from providers, balances on-chain",
+  "live": "crypto-trading-app-akm.vercel.app"
+}`,
+  },
+  {
+    folder: "projects",
+    name: "gamenight.json",
+    cmd: "npm run test:e2e",
+    out: [
+      "[run]   driving real socket clients ...",
+      "[ok]    rooms           create, join, rejoin",
+      "[ok]    snapshots       per-player, no leaked state",
+      "[ok]    llm judge       injection attempts rejected",
+      "[ok]    checks          232 passed, 0 failed",
+      "[done]  no client trusted",
+    ],
+    blurb: "Real-time multiplayer party games, one room code away.",
+    code: `{
+  "name": "Game Night",
+  "what": "real-time multiplayer party games in a browser tab",
+  "server": "authoritative Node + Socket.IO, per-player snapshots",
+  "client": "zero-build vanilla JS PWA, no download, no account",
+  "games": 5,
+  "llm": "game logic hardened against prompt injection",
+  "tests": "232 end-to-end checks on real sockets",
+  "live": "gamenightapp.onrender.com"
+}`,
+  },
+  {
+    folder: "projects",
+    name: "investor-copilot.json",
+    cmd: 'ask "what is my portfolio MOIC?"',
+    out: [
+      "[ok]    intent          holdings.performance",
+      "[ok]    tool call       get_allocations()",
+      "[ok]    tool call       compute_moic()",
+      "[info]  arithmetic runs in code, not the model",
+      "[ok]    answer          MOIC 2.41x, 9 source rows",
+      "[done]  returned with a calculation trace",
+    ],
+    blurb: "Private markets, answered in plain language. The model never invents a number.",
+    code: `{
+  "name": "Investor Copilot",
+  "what": "a conversational assistant for private-markets investors",
+  "rule": "the model never invents a number",
+  "math": "deterministic compute layer over structured ledger data",
+  "answers": "source rows plus a calculation trace, every time",
+  "currencies": ["USD", "GBP", "EUR", "AED"],
+  "evals": "golden-number suite, verified without model calls",
+  "live": "investor-copilot.vercel.app"
+}`,
+  },
+  {
+    folder: "teaching",
+    name: "mentorship.json",
+    cmd: "mentorship --stats",
+    out: [
+      "[calc]  summing batches ...",
+      "[ok]    live batches    50+",
+      "[ok]    batch size      50-100 engineers",
+      "[ok]    mentored        1,000+ developers",
+      "[ok]    platforms       5",
+      "[done]  still taking mentees",
+    ],
+    blurb: "Teaching is where I got good at leading engineers.",
+    code: `{
+  "role": "Subject Matter Expert and lead instructor",
+  "batches": "50+ live courses taught",
+  "batchSize": "50-100 engineers per batch",
+  "mentored": "1,000+ developers",
+  "platforms": ["Codecademy", "Coding Ninjas", "Masai School", "Cuvette", "AccioJob"],
+  "why": "it is why I can take someone from stuck to shipping"
 }`,
   },
   {

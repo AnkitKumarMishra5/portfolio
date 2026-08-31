@@ -116,7 +116,7 @@ export function Workflow() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.75, ease: EASE }}
-            className="lg:col-span-7"
+            className="min-w-0 lg:col-span-7"
           >
             <DiffFrame />
           </motion.div>
@@ -126,7 +126,7 @@ export function Workflow() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.75, delay: 0.1, ease: EASE }}
-          className="rounded-2xl border border-line bg-surface/40 p-6 sm:p-7 lg:col-span-5"
+          className="min-w-0 rounded-2xl border border-line bg-surface/40 p-6 sm:p-7 lg:col-span-5"
         >
           <div className="flex flex-wrap items-center gap-3">
             <span

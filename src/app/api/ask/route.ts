@@ -18,19 +18,47 @@ export const runtime = "nodejs";
 const MAX_QUESTION = 300;
 const WINDOW_MS = 60_000;
 const MAX_PER_WINDOW = 8;
+// Ceiling across all IPs per window, so a distributed flood cannot run up
+// the model bill even when every attacker stays under the per-IP limit.
+const MAX_GLOBAL_PER_WINDOW = 60;
 
 const hits = new Map<string, { count: number; resetAt: number }>();
+const globalHits = { count: 0, resetAt: 0 };
 
-function rateLimit(ip: string) {
+function rateLimit(ip: string): { ok: boolean; retryAfter: number } {
   const now = Date.now();
+
+  if (now > globalHits.resetAt) {
+    globalHits.count = 0;
+    globalHits.resetAt = now + WINDOW_MS;
+    // stale per-IP entries expire with the window; pruning here keeps the
+    // map bounded when a flood rotates through many addresses
+    for (const [k, v] of hits) if (now > v.resetAt) hits.delete(k);
+  }
+
+  const retryAfter = Math.ceil((globalHits.resetAt - now) / 1000);
+  if (globalHits.count >= MAX_GLOBAL_PER_WINDOW) {
+    console.warn(
+      `[ask] rate limit: global window full (${globalHits.count}/${MAX_GLOBAL_PER_WINDOW}), ip=${ip}`
+    );
+    return { ok: false, retryAfter };
+  }
+
   const entry = hits.get(ip);
   if (!entry || now > entry.resetAt) {
     hits.set(ip, { count: 1, resetAt: now + WINDOW_MS });
-    return true;
+    globalHits.count += 1;
+    return { ok: true, retryAfter: 0 };
   }
-  if (entry.count >= MAX_PER_WINDOW) return false;
+  if (entry.count >= MAX_PER_WINDOW) {
+    console.warn(
+      `[ask] rate limit: ip=${ip} hit ${entry.count}/${MAX_PER_WINDOW} in window`
+    );
+    return { ok: false, retryAfter: Math.ceil((entry.resetAt - now) / 1000) };
+  }
   entry.count += 1;
-  return true;
+  globalHits.count += 1;
+  return { ok: true, retryAfter: 0 };
 }
 
 function buildFacts() {
@@ -99,12 +127,16 @@ export async function POST(req: Request) {
     req.headers.get("x-real-ip") ||
     "local";
 
-  if (!rateLimit(ip)) {
+  const limit = rateLimit(ip);
+  if (!limit.ok) {
     return new Response(
       "That is a lot of questions in one minute. Give it a moment, or just email me at " +
         person.email +
         ".",
-      { status: 429, headers: PLAIN }
+      {
+        status: 429,
+        headers: { ...PLAIN, "Retry-After": String(Math.max(limit.retryAfter, 1)) },
+      }
     );
   }
 

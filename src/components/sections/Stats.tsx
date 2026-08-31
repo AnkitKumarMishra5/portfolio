@@ -11,11 +11,10 @@ export function Stats() {
       <div className="mx-auto w-full max-w-6xl">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {stats.map((stat, i) => {
-            const big = stat.wide || stat.full;
             const value = (
               <p
                 className={`mono shrink-0 font-semibold tracking-[-0.03em] text-ink ${
-                  big
+                  stat.wide
                     ? "text-[clamp(2.2rem,5.4vw,3.4rem)]"
                     : "text-[clamp(1.7rem,3.6vw,2.3rem)]"
                 }`}
@@ -35,16 +34,10 @@ export function Stats() {
               <Reveal
                 key={stat.label}
                 delay={i * 0.05}
-                className={
-                  stat.full
-                    ? "col-span-2 sm:col-span-4"
-                    : stat.wide
-                      ? "sm:col-span-2"
-                      : undefined
-                }
+                className={stat.wide ? "col-span-2" : undefined}
               >
                 <SpotlightCard className="card-hair h-full p-5 sm:p-6">
-                  {stat.full ? (
+                  {stat.wide ? (
                     <div className="flex items-center gap-5 sm:gap-8">
                       {value}
                       <p className="max-w-xl text-[14px] leading-snug text-ink-3">

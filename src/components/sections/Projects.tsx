@@ -71,7 +71,7 @@ function Row({ project, index }: { project: Project; index: number }) {
   return (
     <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-14">
       <div
-        className={`lg:sticky lg:top-28 lg:col-span-6 ${
+        className={`min-w-0 lg:sticky lg:top-28 lg:col-span-6 ${
           flipped ? "lg:order-2 lg:col-start-7" : ""
         }`}
       >
@@ -90,7 +90,7 @@ function Row({ project, index }: { project: Project; index: number }) {
         </Reveal>
       </div>
 
-      <div className={`lg:col-span-6 ${flipped ? "lg:order-1 lg:row-start-1" : ""}`}>
+      <div className={`min-w-0 lg:col-span-6 ${flipped ? "lg:order-1 lg:row-start-1" : ""}`}>
         <Stagger className="max-w-xl">
           <StaggerItem>
             <div className="mb-4 flex items-center gap-3">
