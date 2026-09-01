@@ -698,7 +698,6 @@ export const profileLog = [
 type SourceFile = {
   folder: string | null;
   name: string;
-  blurb: string;
   code: string;
   cmd: string;
   out: string[];
@@ -716,7 +715,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    based        Mangalore, India",
       "[ok]    available    true",
     ],
-    blurb: "The short version, in the format I actually think in.",
     code: `{
   "name": "Ankit Kumar Mishra",
   "title": "Full-Stack Engineer and Engineering Lead",
@@ -738,7 +736,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    nothing merges unexplained",
       "[warn]  on-call is not a handoff",
     ],
-    blurb: "The defaults I bring before anyone asks.",
     code: `{
   "specFirst": "The spec comes before the code.",
   "writes": "Idempotent. Explicit state transitions.",
@@ -760,7 +757,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    Pratilipi        6 mos",
       "[ok]    total            6 yrs+",
     ],
-    blurb: "Two long tenures, four teams.",
     code: `[
   {
     "company": "TechPassport",
@@ -792,7 +788,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    apple iap       in-app purchase",
       "[ok]    reconciled      one subscription state",
     ],
-    blurb: "One subscription model, four providers, web and mobile.",
     code: `{
   "problem": "Four billing providers, one subscription truth.",
   "providers": ["Stripe", "Razorpay", "Google Play", "Apple IAP"],
@@ -815,7 +810,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    sanctions       clear (watchlists + PEP)",
       "[done]  approved, account opened",
     ],
-    blurb: "Onboarding went from one market to global users at Vested Finance.",
     code: `{
   "problem": "Onboarding only worked for a single market.",
   "built": [
@@ -839,7 +833,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    broadcast       RPC, confirmed on-chain",
       "[done]  settled on mainnet, not a simulator",
     ],
-    blurb: "A Solana trading terminal that executes real swaps on mainnet.",
     code: `{
   "name": "Crypto Trading App",
   "what": "a Solana terminal that settles on mainnet",
@@ -862,7 +855,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    checks          232 passed, 0 failed",
       "[done]  no client trusted",
     ],
-    blurb: "Real-time multiplayer party games, one room code away.",
     code: `{
   "name": "Game Night",
   "what": "real-time multiplayer party games in a browser tab",
@@ -886,7 +878,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    answer          MOIC 2.41x, 9 source rows",
       "[done]  returned with a calculation trace",
     ],
-    blurb: "Private markets, answered in plain language. The model never invents a number.",
     code: `{
   "name": "Investor Copilot",
   "what": "a conversational assistant for private-markets investors",
@@ -910,7 +901,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    platforms       5",
       "[done]  still taking mentees",
     ],
-    blurb: "Teaching is where I got good at leading engineers.",
     code: `{
   "role": "Subject Matter Expert and lead instructor",
   "batches": "live courses across 50+ batches",
@@ -932,7 +922,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    cloud          4",
       "[ok]    ai             5",
     ],
-    blurb: "What I reach for, grouped the way I use it.",
     code: `{
   "languages": ["TypeScript", "JavaScript", "Python", "SQL"],
   "runtime": ["Node.js", "Express", "Next.js"],
@@ -953,7 +942,6 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    open to        full-time, contract, fractional",
       "[done]  say hello",
     ],
-    blurb: "Email is the fastest path. I reply.",
     code: `{
   "email": "ankit5kumar14@gmail.com",
   "linkedin": "in/ankitkumarmishra",

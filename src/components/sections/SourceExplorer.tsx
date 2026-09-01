@@ -386,9 +386,6 @@ export function SourceExplorer() {
                       ))}
                     </div>
                   </div>
-                  <p className="border-t border-line px-4 py-3 text-[13px] text-ink-3">
-                    {file.blurb}
-                  </p>
                 </motion.div>
               </AnimatePresence>
 
