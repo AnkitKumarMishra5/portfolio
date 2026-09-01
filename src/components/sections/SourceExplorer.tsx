@@ -358,8 +358,8 @@ export function SourceExplorer() {
               </div>
             </div>
 
-            {/* editor */}
-            <div className={`min-w-0 border-b border-line lg:border-b-0 ${showCode ? "" : "hidden lg:block"}`}>
+            {/* editor group: code on top, terminal docked below, like an IDE */}
+            <div className={`min-w-0 flex-col ${showCode ? "flex" : "hidden lg:flex"}`}>
               <div className="flex items-center gap-2 border-b border-line px-4 py-2">
                 <span className="mono truncate text-[11px] text-ink-3">{path}</span>
               </div>
@@ -370,8 +370,9 @@ export function SourceExplorer() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.26, ease: EASE }}
+                  className="flex-1"
                 >
-                  <div className="mono flex min-h-[300px] gap-4 overflow-x-auto p-4 text-[11.5px] leading-[1.75] sm:text-[12.5px]">
+                  <div className="mono flex min-h-[240px] gap-4 overflow-x-auto p-4 text-[11.5px] leading-[1.75] sm:text-[12.5px]">
                     <div className="select-none text-right text-ink-4/50">
                       {lines.map((_, i) => (
                         <div key={i}>{i + 1}</div>
@@ -390,37 +391,30 @@ export function SourceExplorer() {
                   </p>
                 </motion.div>
               </AnimatePresence>
-            </div>
 
-            {/* agent panel: a pane on mobile, a sidebar on lg+ */}
-            <AgentPanel
-              className={`${showCode ? "hidden" : "flex"} lg:flex lg:border-l lg:border-line`}
-            />
-          </div>
+              <div className="border-t border-line">
+                <div className="flex items-center gap-4 border-b border-line px-4 py-2">
+                  <span className="mono text-[10px] uppercase tracking-[0.14em] text-ink">
+                    Terminal
+                  </span>
+                  <span className="mono hidden text-[10px] uppercase tracking-[0.14em] text-ink-4 sm:inline">
+                    Problems
+                  </span>
+                  <span className="mono hidden text-[10px] uppercase tracking-[0.14em] text-ink-4 sm:inline">
+                    Output
+                  </span>
+                  <span className="mono ml-auto text-[10px] text-ink-4">zsh</span>
+                </div>
 
-          <div className={`border-t border-line ${showCode ? "" : "hidden lg:block"}`}>
-            <div className="flex items-center gap-4 border-b border-line px-4 py-2">
-              <span className="mono text-[10px] uppercase tracking-[0.14em] text-ink">
-                Terminal
-              </span>
-              <span className="mono hidden text-[10px] uppercase tracking-[0.14em] text-ink-4 sm:inline">
-                Problems
-              </span>
-              <span className="mono hidden text-[10px] uppercase tracking-[0.14em] text-ink-4 sm:inline">
-                Output
-              </span>
-              <span className="mono ml-auto text-[10px] text-ink-4">zsh</span>
-            </div>
-
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={`term-${path}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.18 }}
-                className="mono max-h-[190px] overflow-y-auto p-4 text-[11px] leading-[1.7] sm:text-[11.5px]"
-              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={`term-${path}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className="mono max-h-[190px] overflow-y-auto p-4 text-[11px] leading-[1.7] sm:text-[11.5px]"
+                  >
                 <p className="mb-1 break-words">
                   <span className="text-success-ink">ankit@macbook</span>
                   <span className="text-ink-4"> % </span>
@@ -447,8 +441,15 @@ export function SourceExplorer() {
                   <span className="text-ink-4"> % </span>
                   <span className="caret text-accent-ink">▍</span>
                 </motion.p>
-              </motion.div>
-            </AnimatePresence>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* agent panel: a pane on mobile, a sidebar on lg+ */}
+            <AgentPanel
+              className={`${showCode ? "hidden" : "flex"} lg:flex lg:border-l lg:border-line`}
+            />
           </div>
         </div>
       </Reveal>
