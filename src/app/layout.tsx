@@ -46,6 +46,9 @@ export const metadata: Metadata = {
   authors: [{ name: person.name, url: SITE_URL }],
   creator: person.name,
   alternates: { canonical: "/" },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   icons: {
     icon: [
       {
