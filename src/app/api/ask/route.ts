@@ -196,6 +196,10 @@ export async function POST(req: Request) {
   }
 
   if (!upstream.ok || !upstream.body) {
+    const detail = await upstream.text().catch(() => "");
+    console.error(
+      `[ask] upstream error: status=${upstream.status} ${detail.slice(0, 300)}`
+    );
     return new Response(
       textStream(
         `The assistant is having a moment. Everything it would tell you is on this page, and you can email me at ${person.email}.`

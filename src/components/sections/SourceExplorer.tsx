@@ -291,7 +291,7 @@ export function SourceExplorer() {
         kicker="Source"
         title="If you would rather read"
         accent="the JSON."
-        intro="The same facts as the rest of this page, structured. Click through the tree: every file runs its own command in the terminal below, and the agent panel answers live, grounded in the same data as the Ask section."
+        intro="Everything on this page, as the JSON I keep it in. Click around the tree, watch the terminal, and if you want to ask something, the agent panel is live."
       />
 
       <Reveal y={28} className="mt-12">

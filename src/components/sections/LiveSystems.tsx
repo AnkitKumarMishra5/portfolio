@@ -60,7 +60,7 @@ export function LiveSystems() {
         kicker="How the work looks"
         title="Different domains,"
         accent="same discipline."
-        intro="Four system walkthroughs. Signature verification, idempotency keys, double-entry posting, region routing, server-authoritative state, and deterministic compute. Illustrative sequences, not live systems."
+        intro="Four system walkthroughs. Signature verification, idempotency keys, double-entry posting, region routing, on-chain settlement, and deterministic compute. Illustrative sequences, not live systems."
       />
 
       <div ref={ref} className="mt-14 grid gap-8 lg:grid-cols-12 lg:gap-10">

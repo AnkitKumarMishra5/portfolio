@@ -51,7 +51,8 @@ export const about: string[] = [
 ];
 
 type Stat = {
-  value: number;
+  value?: number;
+  display?: string;
   prefix?: string;
   suffix?: string;
   label: string;
@@ -71,20 +72,20 @@ export const stats: Stat[] = [
     suffix: "+",
     label: "member cross-functional team led",
   },
+  { value: 2, label: "squads run as de facto product owner" },
   {
-    value: 2,
-    label:
-      "squads run as de facto product owner, owning product and tech together",
-    wide: true,
+    value: 5,
+    suffix: "+",
+    label: "engineer squads led, across companies",
   },
-  { value: 50, suffix: "+", label: "live courses taught" },
+  { value: 50, suffix: "+", label: "batches of live courses taught" },
   { value: 1000, suffix: "+", label: "developers mentored" },
 ];
 
 export const heroStats = [
-  { value: "6+", label: "years shipping" },
-  { value: "15+", label: "cross-functional team" },
-  { value: "1,000+", label: "devs mentored" },
+  { value: "Staff", label: "most recent level" },
+  { value: "0 to 1", label: "monetization stack owned" },
+  { value: "3", label: "side projects, all live" },
 ];
 
 type Role = {
@@ -425,11 +426,11 @@ export const teaching = {
   kicker: "Mentoring",
   title: "Leading engineers is the job.",
   accent: "Teaching is where I got good at it.",
-  copy: "I'm an engineer first. Running 50+ live batches and 1:1 coaching sessions is why I can take someone from stuck to shipping, write a review that teaches rather than blocks, and set technical direction a squad will actually follow.",
+  copy: "I'm an engineer first. Teaching live courses across 50+ batches and 1:1 coaching sessions is why I can take someone from stuck to shipping, write a review that teaches rather than blocks, and set technical direction a squad will actually follow.",
   credential:
     "Subject Matter Expert and lead instructor across several engineering schools.",
   stats: [
-    { value: "50+", label: "live batches taught" },
+    { value: "50+", label: "batches of live courses taught" },
     { value: "50-100", label: "engineers per batch" },
     { value: "1,000+", label: "developers mentored" },
   ],
@@ -521,19 +522,20 @@ export const scenarios: Scenario[] = [
     ],
   },
   {
-    id: "realtime",
-    tab: "Real-time",
-    title: "A multiplayer round, with no client trusted",
+    id: "crypto",
+    tab: "Crypto",
+    title: "A swap, quoted to confirmed on mainnet",
     blurb:
-      "Same instinct as a payment flow. The server decides, the client only renders, and nobody receives state their role should not see.",
+      "The server quotes and builds the transaction, the user signs it in the browser, the chain settles it. API keys never leave the server.",
     lines: [
-      { kind: "cmd", text: "room join --code ABCDE" },
-      { kind: "step", label: "socket", value: "authenticated", tone: "ok" },
-      { kind: "step", label: "room state", value: "per-player snapshot", tone: "info" },
-      { kind: "sub", text: "each player receives only what their role can see" },
-      { kind: "step", label: "action", value: "validated server side", tone: "ok" },
-      { kind: "step", label: "broadcast", value: "diff to 8 clients", tone: "info" },
-      { kind: "done", text: "state advanced, no client trusted" },
+      { kind: "cmd", text: "swap --from SOL --to USDC" },
+      { kind: "step", label: "jupiter quote", value: "received", tone: "info" },
+      { kind: "step", label: "safety checks", value: "mint, freeze, liquidity", tone: "ok" },
+      { kind: "step", label: "transaction", value: "built unsigned", tone: "info" },
+      { kind: "sub", text: "the server builds it, only the user can sign it" },
+      { kind: "step", label: "signature", value: "Privy wallet, in browser", tone: "ok" },
+      { kind: "step", label: "broadcast", value: "sent over RPC", tone: "info" },
+      { kind: "done", text: "confirmed on-chain, settled on mainnet" },
     ],
   },
   {
@@ -902,7 +904,7 @@ export const sourceFiles: SourceFile[] = [
     cmd: "mentorship --stats",
     out: [
       "[calc]  summing batches ...",
-      "[ok]    live batches    50+",
+      "[ok]    course batches  50+",
       "[ok]    batch size      50-100 engineers",
       "[ok]    mentored        1,000+ developers",
       "[ok]    platforms       5",
@@ -911,7 +913,7 @@ export const sourceFiles: SourceFile[] = [
     blurb: "Teaching is where I got good at leading engineers.",
     code: `{
   "role": "Subject Matter Expert and lead instructor",
-  "batches": "50+ live courses taught",
+  "batches": "live courses across 50+ batches",
   "batchSize": "50-100 engineers per batch",
   "mentored": "1,000+ developers",
   "platforms": ["Codecademy", "Coding Ninjas", "Masai School", "Cuvette", "AccioJob"],
@@ -979,7 +981,7 @@ export const agentTranscript = [
     text: "75 to 80% off the critical endpoints. Caching, query shape, async refactoring on the hot paths.",
   },
   { role: "think", text: "Anything on leadership?" },
-  { role: "tool", text: "232 checks passed" },
+  { role: "tool", text: "read teaching/mentorship.json" },
   {
     role: "agent",
     text: "Two squads without a PM, inside a 15+ member cross-functional team. 1,000+ engineers mentored.",

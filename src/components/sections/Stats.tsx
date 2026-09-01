@@ -19,13 +19,15 @@ export function Stats() {
                     : "text-[clamp(1.7rem,3.6vw,2.3rem)]"
                 }`}
               >
-                {stat.prefix ? (
+                {stat.display ? (
+                  stat.display
+                ) : stat.prefix ? (
                   <>
                     <span className="text-accent-ink">{stat.prefix}</span>
-                    <Counter to={stat.value} suffix={stat.suffix} format={false} />
+                    <Counter to={stat.value!} suffix={stat.suffix} format={false} />
                   </>
                 ) : (
-                  <Counter to={stat.value} suffix={stat.suffix ?? ""} />
+                  <Counter to={stat.value!} suffix={stat.suffix ?? ""} />
                 )}
               </p>
             );

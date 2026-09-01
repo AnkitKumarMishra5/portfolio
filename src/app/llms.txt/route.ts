@@ -39,7 +39,7 @@ ${about.join("\n\n")}
 
 ## Core numbers
 
-${stats.map((s) => `- ${s.prefix ?? ""}${s.value.toLocaleString("en-US")}${s.suffix ?? ""} ${s.label}`).join("\n")}
+${stats.map((s) => `- ${s.display ?? `${s.prefix ?? ""}${s.value!.toLocaleString("en-US")}${s.suffix ?? ""}`} ${s.label}`).join("\n")}
 
 ## Experience
 
