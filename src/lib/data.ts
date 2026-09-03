@@ -85,7 +85,7 @@ export const stats: Stat[] = [
 export const heroStats = [
   { value: "Staff", label: "most recent level" },
   { value: "0 to 1", label: "monetization stack owned" },
-  { value: "3", label: "side projects, all live" },
+  { value: "4", label: "side projects featured here, all live" },
 ];
 
 type Role = {
@@ -303,6 +303,7 @@ export type Project = {
   shotAlt: string;
   shotMobile?: string;
   shotMobileAlt?: string;
+  shotMobileLabel?: string;
 };
 
 export const projects: Project[] = [
@@ -354,10 +355,41 @@ export const projects: Project[] = [
     year: "2026",
     shot: "/shots/gamenight.jpg",
     shotMobile: "/shots/gamenight-mobile.jpg",
+    shotMobileLabel: "every phone is a seat",
     shotMobileAlt:
       "Game Night on a phone: enter a name, then create a room or join with a five-letter code",
     shotAlt:
       "The Game Night landing screen, where a player enters a name and either creates a room or joins with a code",
+  },
+  {
+    name: "Outlay",
+    kicker: "Every card you hold, reconciled every month",
+    summary:
+      "An expense tracker, validator and analyser for Indian credit card statements. It opens the password-protected PDF your bank emails you, checks its arithmetic, and turns a wallet of cards into one screen.",
+    detail: [
+      "Statements arrive locked. Outlay derives the password from the cardholder profile, trying fourteen issuer patterns in a preference order, and learns a new template from any password typed once, so the next card at that issuer opens unprompted. The file is unlocked and read in memory and never written to disk.",
+      "Extraction is deterministic, with no model involved. Twelve checks then run before anything is persisted, the important one comparing computed debit and credit totals against the totals the bank printed, so a half-read statement announces itself instead of quietly skewing a year of numbers. The check record is stored with the statement.",
+      "Every account is a tenant. Name, date of birth, card digits and statement passwords are sealed with AES-256-GCM under a key derived per account, so a leak scoped to one account cannot unseal another.",
+      "The only optional model call rereads merchant names when the category rules get them wrong, metered at two runs per card per month.",
+    ],
+    highlights: [
+      { label: "Passwords", value: "14 derived patterns, new ones learned" },
+      { label: "Verification", value: "12 checks against the printed totals" },
+      { label: "Encryption", value: "AES-256-GCM, per-account keys" },
+      { label: "Statements", value: "Parsed in memory, never written to disk" },
+    ],
+    stack: ["Next.js 16", "TypeScript", "Tailwind v4", "Postgres", "pdf.js", "Recharts", "Neon", "Vercel"],
+    live: "https://outlay-expense-tracker.vercel.app/",
+    liveLabel: "outlay-expense-tracker.vercel.app",
+    repo: "https://github.com/AnkitKumarMishra5/outlay-expense-tracker",
+    year: "2026",
+    shot: "/shots/outlay.jpg",
+    shotAlt:
+      "The Outlay dashboard: nineteen cards ranked by spend, headline totals, a bills panel showing seventeen of nineteen settled this cycle, a spend trend chart and a category split donut",
+    shotMobile: "/shots/outlay-mobile.jpg",
+    shotMobileLabel: "the whole wallet, in a pocket",
+    shotMobileAlt:
+      "Outlay on a phone: the featured credit card above a list of cards ranked by spend, each with its due date and outstanding amount",
   },
   {
     name: "Investor Copilot",

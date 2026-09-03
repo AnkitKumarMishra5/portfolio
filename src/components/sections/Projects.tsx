@@ -82,7 +82,7 @@ function Row({ project, index }: { project: Project; index: number }) {
               <PhoneFrame
                 src={project.shotMobile}
                 alt={project.shotMobileAlt ?? ""}
-                label="every phone is a seat"
+                label={project.shotMobileLabel}
                 className="absolute -bottom-12 right-2 w-[150px]"
               />
             ) : null}

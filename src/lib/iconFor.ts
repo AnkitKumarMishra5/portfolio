@@ -14,6 +14,9 @@ const alias: Record<string, string> = {
   "apache kafka": "apachekafka",
   "solana rpc": "solana",
   "database optimization": "postgresql",
+  "next.js 16": "nextdotjs",
+  "tailwind v4": "tailwindcss",
+  postgres: "postgresql",
 };
 
 const byTitle = new Map(brandIcons.map((i) => [i.title.toLowerCase(), i]));

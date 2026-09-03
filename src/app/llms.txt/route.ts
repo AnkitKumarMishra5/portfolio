@@ -66,6 +66,8 @@ ${caseStudies
 
 ## Side projects
 
+A selection of the ones worth reading about. More repositories at ${person.github}.
+
 ${projects
   .map(
     (p) =>
