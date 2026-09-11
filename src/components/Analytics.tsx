@@ -129,7 +129,7 @@ export function Analytics() {
 
     let visitTimer: ReturnType<typeof setTimeout> | undefined;
     const armVisit = () => {
-      visitTimer = setTimeout(visit, 600);
+      visitTimer = setTimeout(visit, 0);
     };
     if (document.readyState === "complete") armVisit();
     else addEventListener("load", armVisit, { once: true });

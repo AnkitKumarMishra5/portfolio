@@ -16,7 +16,10 @@ export type Tally = [string, number][];
 const IST = "Asia/Kolkata";
 const SESSION_GAP_MS = 30 * 60e3;
 
-const CONVERSIONS = new Set(["email", "linkedin", "github", "x", "resume_pdf", "resume_page", "project_live", "project_repo"]);
+const CONTACT = new Set(["email", "linkedin", "x"]);
+const RESUME = new Set(["resume_pdf", "resume_page"]);
+const WORK = new Set(["project_live", "project_repo", "github"]);
+const CONVERSIONS = new Set([...CONTACT, ...RESUME, ...WORK]);
 export const TARGET_LABEL: Record<string, string> = {
   email: "Email",
   linkedin: "LinkedIn",
@@ -62,16 +65,18 @@ export type Person = {
   device: string | null;
   client: string | null;
   actions: string[];
+  targets: string[];
   asked: number;
   standing: { key: string; label: string };
 };
 
 function foldPeople(list: UsageEvent[]): Person[] {
-  type Acc = Omit<Person, "days" | "sections" | "paths" | "actions" | "standing"> & {
+  type Acc = Omit<Person, "days" | "sections" | "paths" | "actions" | "targets" | "standing"> & {
     dayset: Set<string>;
     sectionset: Set<string>;
     pathset: Set<string>;
     actionlist: string[];
+    targetlist: string[];
     lastVisitAt: number;
   };
   const by = new Map<string, Acc>();
@@ -99,6 +104,7 @@ function foldPeople(list: UsageEvent[]): Person[] {
         sectionset: new Set(),
         pathset: new Set(),
         actionlist: [],
+        targetlist: [],
         lastVisitAt: 0,
       };
       by.set(id, p);
@@ -125,22 +131,31 @@ function foldPeople(list: UsageEvent[]): Person[] {
     }
     if (e.type === "click") {
       const t = strOf(e.target);
-      if (t) p.actionlist.push(strOf(e.label) ? `${TARGET_LABEL[t] || t}: ${e.label}` : TARGET_LABEL[t] || t);
+      if (t) {
+        p.targetlist.push(t);
+        p.actionlist.push(strOf(e.label) ? `${TARGET_LABEL[t] || t}: ${e.label}` : TARGET_LABEL[t] || t);
+      }
     }
     if (e.type === "ask") p.asked += 1;
   }
   return [...by.values()]
     .map((p) => {
       const days = p.dayset.size;
-      const converted = p.actionlist.length > 0 || p.asked > 0;
       const engaged = p.seconds >= 30 || p.scrollPct >= 50 || p.sectionset.size >= 3;
-      const standing = converted
-        ? { key: "converted", label: "Reached out" }
-        : days >= 2
-          ? { key: "returned", label: "Came back" }
-          : engaged
-            ? { key: "engaged", label: "Read it" }
-            : { key: "bounced", label: "Glanced" };
+      const targets = [...new Set(p.targetlist)];
+      const standing = targets.some((t) => CONTACT.has(t))
+        ? { key: "contact", label: "Made contact" }
+        : targets.some((t) => RESUME.has(t))
+          ? { key: "resume", label: "Took the resume" }
+          : targets.some((t) => WORK.has(t))
+            ? { key: "work", label: "Opened the work" }
+            : p.asked > 0
+              ? { key: "asked", label: "Asked a question" }
+              : days >= 2
+                ? { key: "returned", label: "Came back" }
+                : engaged
+                  ? { key: "engaged", label: "Read it" }
+                  : { key: "bounced", label: "Glanced" };
       return {
         id: p.id,
         stable: p.stable,
@@ -159,6 +174,7 @@ function foldPeople(list: UsageEvent[]): Person[] {
         device: p.device,
         client: p.client,
         actions: [...new Set(p.actionlist)],
+        targets,
         asked: p.asked,
         standing,
       };
@@ -312,6 +328,9 @@ export async function summarize(range: Range = "all") {
       bouncePct: pct(bounces, leaves.length),
       converters: converted.size,
       conversionPct: pct(converted.size, people.length),
+      contacted: people.filter((p) => p.targets.some((t) => CONTACT.has(t))).length,
+      tookResume: people.filter((p) => p.targets.some((t) => RESUME.has(t))).length,
+      openedWork: people.filter((p) => p.targets.some((t) => WORK.has(t))).length,
       resumeDownloads: clicks.filter((e) => e.target === "resume_pdf").length,
       resumeViews: visits.filter((e) => e.path === "/resume").length,
       emailClicks: clicks.filter((e) => e.target === "email").length,

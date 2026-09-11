@@ -13,6 +13,8 @@ import {
   summarize,
 } from "@/lib/analytics/summary";
 import { PurgeButton } from "./PurgeButton";
+import { AutoRefresh } from "./AutoRefresh";
+import { IndexNowButton } from "./IndexNowButton";
 
 export const dynamic = "force-dynamic";
 
@@ -93,7 +95,10 @@ function Pill({ children, tone = "neutral" }: { children: React.ReactNode; tone?
 }
 
 const STANDING_TONE: Record<string, "neutral" | "good" | "warn" | "bad" | "accent"> = {
-  converted: "good",
+  contact: "good",
+  resume: "good",
+  work: "accent",
+  asked: "accent",
   returned: "accent",
   engaged: "neutral",
   bounced: "warn",
@@ -152,6 +157,8 @@ export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
               </a>
             ))}
           </nav>
+          <AutoRefresh />
+          <IndexNowButton token={token} />
           <a href={`/api/admin/stats${qs(range)}`} className="mono rounded-full border border-line-2 px-3.5 py-1.5 text-[11.5px] text-ink-3 hover:text-ink">
             json
           </a>
@@ -164,10 +171,10 @@ export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
         <Tile value={t.people} label="people" note={`${t.returning} came back`} />
         <Tile value={t.medianSeconds === null ? "—" : fmtSeconds(t.medianSeconds)} label="median time on page" />
         <Tile value={t.medianScroll === null ? "—" : `${t.medianScroll}%`} label="median scroll depth" note={`${t.bouncePct}% bounced`} />
-        <Tile value={`${t.conversionPct}%`} label="reached out" note={`${t.converters} people clicked through or asked`} />
-        <Tile value={t.resumeDownloads} label="resume PDF opened" note={`${t.resumeViews} read the HTML resume`} />
-        <Tile value={t.emailClicks + t.linkedinClicks} label="email + LinkedIn clicks" note={`${t.emailClicks} email · ${t.linkedinClicks} LinkedIn`} />
-        <Tile value={t.projectClicks + t.githubClicks} label="project + GitHub clicks" note={`${t.projectClicks} live · ${t.githubClicks} source`} />
+        <Tile value={t.contacted} label="made contact" note={`email, LinkedIn or X · ${t.conversionPct}% of people did something`} />
+        <Tile value={t.tookResume} label="took the resume" note={`${t.resumeDownloads} opened the PDF · ${t.resumeViews} read the page`} />
+        <Tile value={t.asks} label="questions asked" note={`${t.emailClicks} email clicks · ${t.linkedinClicks} LinkedIn`} />
+        <Tile value={t.openedWork} label="opened the work" note={`${t.projectClicks} live demos · ${t.githubClicks} source`} />
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-3">

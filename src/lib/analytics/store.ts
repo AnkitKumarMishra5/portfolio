@@ -27,7 +27,7 @@ export const SILENT = env("ANALYTICS") === "off";
 const g = globalThis as unknown as { __akmUsageEvents?: UsageEvent[] };
 const memory: UsageEvent[] = (g.__akmUsageEvents ??= []);
 let cache: { at: number; rows: UsageEvent[] } | null = null;
-const CACHE_MS = 10_000;
+const CACHE_MS = 2_000;
 let writesSinceTrim = 0;
 
 async function redis<T = unknown>(command: (string | number)[]): Promise<T> {
