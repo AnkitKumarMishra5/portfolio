@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { BTN, BTN_ON } from "./ui";
 
 export function AutoRefresh({ seconds = 10 }: { seconds?: number }) {
   const router = useRouter();
@@ -17,15 +18,9 @@ export function AutoRefresh({ seconds = 10 }: { seconds?: number }) {
   }, [on, seconds, router]);
 
   return (
-    <button
-      onClick={() => setOn((v) => !v)}
-      aria-pressed={on}
-      className={`mono inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[11.5px] transition-colors ${
-        on ? "border-accent/40 bg-accent-dim text-accent-ink" : "border-line-2 text-ink-3 hover:text-ink"
-      }`}
-    >
-      <span className={`size-1.5 rounded-full ${on ? "live-dot bg-accent" : "bg-ink-4"}`} />
-      {on ? (pending ? "refreshing" : `live · ${seconds}s`) : "paused"}
+    <button onClick={() => setOn((v) => !v)} aria-pressed={on} className={on ? BTN_ON : BTN}>
+      <span className={`size-[7px] shrink-0 rounded-full ${on ? "live-dot bg-accent" : "bg-ink-4"}`} />
+      {on ? (pending ? "Refreshing" : "Live") : "Paused"}
     </button>
   );
 }

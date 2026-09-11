@@ -15,6 +15,7 @@ import {
 import { PurgeButton } from "./PurgeButton";
 import { AutoRefresh } from "./AutoRefresh";
 import { IndexNowButton } from "./IndexNowButton";
+import { BTN } from "./ui";
 
 export const dynamic = "force-dynamic";
 
@@ -135,7 +136,7 @@ export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
   return (
     <main className="mx-auto w-full max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
       <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-        <div>
+        <div className="min-w-0">
           <p className="label text-[10px]">Usage</p>
           <h1 className="h-display mt-3 text-[clamp(2rem,4.6vw,3rem)] text-ink">Who is reading, and from where.</h1>
           <p className="mono mt-3 text-[11.5px] text-ink-4">
@@ -144,25 +145,30 @@ export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
             {PERSISTENT_IDS ? " · persistent ids on" : " · daily-rotating ids"}
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <nav className="flex flex-wrap gap-1 rounded-full border border-line-2 bg-surface/50 p-1">
+        <div className="flex shrink-0 flex-col items-start gap-3 lg:items-end">
+          <nav aria-label="Date range" className="flex max-w-full gap-1 overflow-x-auto whitespace-nowrap rounded-full border border-line-2 bg-surface/50 p-1">
             {(Object.keys(RANGES) as Range[]).map((r) => (
               <a
                 key={r}
                 href={qs(r)}
                 aria-current={r === range ? "page" : undefined}
-                className={`rounded-full px-3 py-1.5 text-[12.5px] transition-colors ${r === range ? "bg-accent text-on-accent" : "text-ink-3 hover:text-ink"}`}
+                className={`rounded-full px-3.5 py-1.5 text-[12.5px] transition-colors ${r === range ? "bg-accent font-medium text-on-accent" : "text-ink-3 hover:text-ink"}`}
               >
                 {RANGES[r].label}
               </a>
             ))}
           </nav>
-          <AutoRefresh />
-          <IndexNowButton token={token} />
-          <a href={`/api/admin/stats${qs(range)}`} className="mono rounded-full border border-line-2 px-3.5 py-1.5 text-[11.5px] text-ink-3 hover:text-ink">
-            json
-          </a>
-          <PurgeButton token={token} />
+          <div className="flex flex-wrap items-center gap-2">
+            <AutoRefresh />
+            <IndexNowButton token={token} />
+            <a href={`/api/admin/stats${qs(range)}`} className={BTN}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M8 4H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1M16 4h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-1" />
+              </svg>
+              JSON
+            </a>
+            <PurgeButton token={token} />
+          </div>
         </div>
       </header>
 
@@ -181,12 +187,12 @@ export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
         <Panel title="Trend" hint="page views per day, up to 90 days" className="lg:col-span-2">
           {s.perDay.length ? (
             <>
-              <div className="flex h-24 items-end gap-[3px] border-b border-line px-0.5">
+              <div className="flex h-24 items-end justify-start gap-[3px] border-b border-line px-0.5">
                 {s.perDay.map((d) => (
                   <div
                     key={d.day}
                     title={`${d.day}: ${d.visits} views, ${d.people} people, ${d.conversions} clicks, ${d.crawls} crawler hits`}
-                    className="relative flex-1 rounded-t-sm"
+                    className="relative w-full max-w-[20px] flex-1 rounded-t-sm"
                     style={{ height: `${Math.max(2, Math.round((d.visits / peakDay) * 100))}%`, background: "linear-gradient(180deg, var(--accent), var(--violet))", minWidth: 3 }}
                   />
                 ))}

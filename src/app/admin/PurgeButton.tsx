@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { BTN_DANGER } from "./ui";
 
 export function PurgeButton({ token }: { token: string }) {
   const [state, setState] = useState<"idle" | "busy" | "done" | "failed">("idle");
+
   const run = async () => {
     if (!confirm("Wipe every recorded event and start from zero? This cannot be undone.")) return;
     setState("busy");
@@ -15,13 +17,13 @@ export function PurgeButton({ token }: { token: string }) {
       setState("failed");
     }
   };
+
   return (
-    <button
-      onClick={run}
-      disabled={state === "busy"}
-      className="mono rounded-full border border-rose-400/40 bg-rose-400/10 px-3.5 py-1.5 text-[11.5px] text-rose-300 transition-colors hover:border-rose-400/70 hover:bg-rose-400/20 disabled:opacity-50"
-    >
-      {state === "busy" ? "wiping…" : state === "done" ? "wiped" : state === "failed" ? "failed, retry" : "wipe all data"}
+    <button onClick={run} disabled={state === "busy"} className={BTN_DANGER}>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+      </svg>
+      {state === "busy" ? "Wiping" : state === "done" ? "Wiped" : state === "failed" ? "Retry" : "Wipe data"}
     </button>
   );
 }
