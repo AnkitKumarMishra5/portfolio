@@ -34,11 +34,10 @@ npm run dev
 
 ## Environment
 
-Everything is optional; the site works with none of it set. See `.env.example` for the
-full list with explanations. The ones that matter:
+The site builds and runs with none of it set. `.env.example` marks what is required/optional; in short:
 
 - `OPENAI_API_KEY`: turns on the live assistant.
-- `ADMIN_TOKEN`: opens `/admin?token=…` in production.
+- `ADMIN_TOKEN`: opens `/admin?token=…` in production. Required for the dashboard.
 - `ANALYTICS_ID_SECRET`: keys visitor pseudonyms.
 - `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`: keeps usage history across
   deploys. Add the Upstash integration in the Vercel dashboard and they are injected.
