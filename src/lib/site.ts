@@ -7,3 +7,8 @@ const fromEnv =
       : "");
 
 export const SITE_URL = (fromEnv || "http://localhost:3007").replace(/\/$/, "");
+
+export const SITE_NAME = "Ankit Kumar Mishra";
+
+export const absolute = (path: string) =>
+  path.startsWith("http") ? path : `${SITE_URL}${path.startsWith("/") ? "" : "/"}${path}`;

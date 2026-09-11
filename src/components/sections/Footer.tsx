@@ -51,7 +51,10 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col-reverse items-start justify-between gap-4 border-t border-line pt-6 sm:flex-row sm:items-center">
           <p className="mono text-[11.5px] text-ink-4">
-            © {year} {person.name}. Built with Next.js and Tailwind.
+            © {year} {person.name}. Built with Next.js and Tailwind.{" "}
+            <a href="/privacy" className="link-sweep text-ink-3 hover:text-ink">
+              Privacy
+            </a>
           </p>
 
           <motion.a

@@ -17,86 +17,14 @@ import { Teaching } from "@/components/sections/Teaching";
 import { Recognition } from "@/components/sections/Recognition";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
-import { education, experience, person, projects, skillGroups } from "@/lib/data";
-import { SITE_URL } from "@/lib/site";
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": `${SITE_URL}/#person`,
-      name: person.name,
-      givenName: "Ankit",
-      familyName: "Mishra",
-      jobTitle: person.role,
-      description: person.shortBio,
-      email: `mailto:${person.email}`,
-      url: SITE_URL,
-      image: `${SITE_URL}${person.photo}`,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Mangalore",
-        addressRegion: "Karnataka",
-        addressCountry: "IN",
-      },
-      sameAs: [person.linkedin, person.github],
-      alumniOf: {
-        "@type": "CollegeOrUniversity",
-        name: education.school,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Phagwara",
-          addressRegion: "Punjab",
-          addressCountry: "IN",
-        },
-      },
-      knowsAbout: skillGroups.flatMap((g) => g.items).slice(0, 30),
-      hasOccupation: experience.flatMap((c) =>
-        c.roles.map((r) => ({
-          "@type": "Occupation",
-          name: r.title,
-          occupationLocation: { "@type": "Place", name: c.location },
-        }))
-      ),
-    },
-    {
-      "@type": "ProfilePage",
-      "@id": `${SITE_URL}/#profilepage`,
-      url: SITE_URL,
-      name: `${person.name} | ${person.headline}`,
-      about: { "@id": `${SITE_URL}/#person` },
-      mainEntity: { "@id": `${SITE_URL}/#person` },
-      inLanguage: "en",
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${SITE_URL}/#website`,
-      url: SITE_URL,
-      name: `${person.name} | ${person.headline}`,
-      description: person.shortBio,
-      inLanguage: "en",
-      publisher: { "@id": `${SITE_URL}/#person` },
-    },
-    ...projects.map((p) => ({
-      "@type": "SoftwareApplication",
-      name: p.name,
-      description: p.summary,
-      url: p.live,
-      applicationCategory: "WebApplication",
-      operatingSystem: "Web",
-      author: { "@id": `${SITE_URL}/#person` },
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    })),
-  ],
-};
+import { homeJsonLd, serializeJsonLd } from "@/lib/jsonld";
 
 export default function Home() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeJsonLd) }}
       />
       <Nav />
       <SectionRail />

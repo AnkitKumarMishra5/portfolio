@@ -113,7 +113,7 @@ function AgentPanel({ className = "" }: { className?: string }) {
     try {
       const res = await fetch("/api/ask", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-akm-source": "explorer" },
         body: JSON.stringify({ question: trimmed }),
         signal: controller.signal,
       });

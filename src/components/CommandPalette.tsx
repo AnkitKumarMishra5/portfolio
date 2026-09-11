@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { navLinks, person, projects } from "@/lib/data";
 import { IconCheck, IconSearch } from "./ui/Icons";
+import { trackAction } from "./Analytics";
 
 type Item = {
   id: string;
@@ -48,6 +49,7 @@ export function CommandPalette() {
       hint: p.liveLabel,
       group: "Projects",
       run: () => {
+        trackAction("project_live", p.name);
         window.open(p.live, "_blank", "noopener,noreferrer");
         setOpen(false);
       },
@@ -75,6 +77,7 @@ export function CommandPalette() {
         hint: person.email,
         group: "Contact",
         run: () => {
+          trackAction("email");
           window.location.href = `mailto:${person.email}`;
           setOpen(false);
         },
@@ -85,6 +88,7 @@ export function CommandPalette() {
         hint: "ankitkumarmishra",
         group: "Contact",
         run: () => {
+          trackAction("linkedin");
           window.open(person.linkedin, "_blank", "noopener,noreferrer");
           setOpen(false);
         },
@@ -95,6 +99,7 @@ export function CommandPalette() {
         hint: "AnkitKumarMishra5",
         group: "Contact",
         run: () => {
+          trackAction("github");
           window.open(person.github, "_blank", "noopener,noreferrer");
           setOpen(false);
         },
@@ -105,6 +110,7 @@ export function CommandPalette() {
         hint: "PDF",
         group: "Contact",
         run: () => {
+          trackAction("resume_pdf");
           window.open(person.resume, "_blank", "noopener,noreferrer");
           setOpen(false);
         },

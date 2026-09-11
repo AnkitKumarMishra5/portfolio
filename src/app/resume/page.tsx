@@ -10,13 +10,17 @@ import {
   skillGroups,
   teaching,
 } from "@/lib/data";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, absolute } from "@/lib/site";
+import { resumeJsonLd, serializeJsonLd } from "@/lib/jsonld";
 import { IconArrowUpRight, IconDownload } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
   title: "Resume",
   description: `Full resume for ${person.name}: ${person.headline}. Payments, billing, KYC and compliance, API performance, and LLM systems across FinTech and RegTech.`,
-  alternates: { canonical: "/resume" },
+  alternates: {
+    canonical: "/resume",
+    types: { "application/pdf": absolute(person.resume) },
+  },
   openGraph: {
     title: `Resume | ${person.name}`,
     description: person.shortBio,
@@ -42,6 +46,10 @@ function Block({
 export default function ResumePage() {
   return (
     <main className="mx-auto w-full max-w-3xl px-6 py-16 sm:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(resumeJsonLd) }}
+      />
       <nav className="no-print mb-12 flex flex-wrap items-center gap-x-5 gap-y-3">
         <Link
           href="/"

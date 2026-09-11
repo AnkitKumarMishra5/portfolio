@@ -4,6 +4,7 @@ import {
   awards,
   caseStudies,
   education,
+  faqs,
   guardrails,
   experience,
   person,
@@ -28,8 +29,14 @@ ${person.headline}. Most recently ${person.role} at ${person.company} (${person.
 - Email: ${person.email}
 - LinkedIn: ${person.linkedin}
 - GitHub: ${person.github}
+- X: ${person.x}
 - Resume (PDF): ${SITE_URL}${person.resume}
 - Resume (HTML): ${SITE_URL}/resume
+- Privacy: ${SITE_URL}/privacy
+
+## Common questions
+
+${faqs.map((f) => `### ${f.q}\n${f.a}`).join("\n\n")}
 
 ## About
 

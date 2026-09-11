@@ -12,8 +12,15 @@ import {
   skillGroups,
   teaching,
 } from "@/lib/data";
+import { after } from "next/server";
+import { recordAsk } from "@/lib/analytics/events";
 
 export const runtime = "nodejs";
+
+function logAsk(req: Request, question: string, ok: boolean) {
+  const source = req.headers.get("x-akm-source") === "explorer" ? "explorer" : "ask";
+  after(() => recordAsk(req.headers, { question, ok, source, vid: req.headers.get("x-akm-vid") }).catch(() => {}));
+}
 
 const MAX_QUESTION = 300;
 const WINDOW_MS = 60_000;
@@ -158,6 +165,7 @@ export async function POST(req: Request) {
 
   const key = process.env.OPENAI_API_KEY;
   if (!key) {
+    logAsk(req, question, false);
     return new Response(
       textStream(
         `The live assistant is not configured on this deployment, so I cannot answer that one here. Everything it would draw on is on this page: the work, the projects, and the experience. For anything else, email me at ${person.email}.`
@@ -207,6 +215,8 @@ export async function POST(req: Request) {
       { headers: PLAIN }
     );
   }
+
+  logAsk(req, question, true);
 
   const decoder = new TextDecoder();
   const encoder = new TextEncoder();

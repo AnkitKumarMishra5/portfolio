@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { aiSuggestions, person } from "@/lib/data";
+import { aiSuggestions, faqs, person } from "@/lib/data";
 import { Section, SectionHeading } from "../ui/SectionHeading";
 import { Reveal } from "../ui/Reveal";
 import { IconArrowUpRight, IconMail } from "../ui/Icons";
@@ -94,7 +94,7 @@ export function AskAI() {
     try {
       const res = await fetch("/api/ask", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-akm-source": "ask" },
         body: JSON.stringify({ question: trimmed }),
         signal: controller.signal,
       });
@@ -236,6 +236,32 @@ export function AskAI() {
               )}
             </AnimatePresence>
           </div>
+        </div>
+      </Reveal>
+
+      <Reveal y={24} className="mt-14">
+        <div className="mb-6 flex items-baseline gap-3">
+          <span className="label">Answered already</span>
+          <span className="h-px flex-1 bg-line" />
+        </div>
+        <div className="grid gap-x-12 sm:grid-cols-2">
+          {faqs.map((f) => (
+            <details key={f.q} className="group border-b border-line">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-4 text-[15px] text-ink transition-colors hover:text-accent-ink [&::-webkit-details-marker]:hidden">
+                <span className="text-pretty">{f.q}</span>
+                <span
+                  aria-hidden
+                  className="relative grid size-5 shrink-0 place-items-center rounded-full border border-line-2 text-ink-3 transition-colors group-open:border-accent group-open:text-accent-ink"
+                >
+                  <span className="absolute h-px w-2 bg-current" />
+                  <span className="absolute h-2 w-px bg-current transition-opacity group-open:opacity-0" />
+                </span>
+              </summary>
+              <p className="max-w-prose pb-5 text-pretty text-[14.5px] leading-[1.7] text-ink-3">
+                {f.a}
+              </p>
+            </details>
+          ))}
         </div>
       </Reveal>
     </Section>

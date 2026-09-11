@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import { person } from "@/lib/data";
-import { SITE_URL } from "@/lib/site";
+import { person, profiles } from "@/lib/data";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Cursor } from "@/components/ui/Cursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { MotionProvider } from "@/components/MotionProvider";
+import { Analytics } from "@/components/Analytics";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -17,16 +18,21 @@ const display = Instrument_Serif({
   style: ["italic", "normal"],
 });
 
+const TITLE = `${person.name} | Engineering Lead and Full-Stack Engineer`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Ankit Kumar Mishra | Engineering Lead and Full-Stack Engineer",
-    template: "%s | Ankit Kumar Mishra",
+    default: TITLE,
+    template: `%s | ${person.name}`,
   },
-  description: person.shortBio,
+  description: person.seoDescription,
   keywords: [
-    "Full Stack Engineer",
+    "Ankit Kumar Mishra",
+    "Ankit Mishra",
     "Engineering Lead",
+    "Full Stack Engineer",
+    "Full-Stack Engineer",
     "Staff Software Engineer",
     "Payments Engineer",
     "FinTech",
@@ -42,42 +48,47 @@ export const metadata: Metadata = {
     "LLM",
     "RAG",
     "MCP",
+    "Mangalore",
+    "Remote",
   ],
   authors: [{ name: person.name, url: SITE_URL }],
   creator: person.name,
-  alternates: { canonical: "/" },
+  publisher: person.name,
+  alternates: {
+    canonical: "/",
+    types: {
+      "text/plain": `${SITE_URL}/llms.txt`,
+    },
+  },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
   },
   icons: {
     icon: [
-      {
-        url: "/icon-light.png",
-        type: "image/png",
-        sizes: "64x64",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark.png",
-        type: "image/png",
-        sizes: "64x64",
-        media: "(prefers-color-scheme: dark)",
-      },
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/icon-96.png", type: "image/png", sizes: "96x96" },
     ],
+    shortcut: "/icon-96.png",
   },
   openGraph: {
     type: "profile",
     firstName: "Ankit",
     lastName: "Mishra",
+    username: person.linkedinHandle,
     url: SITE_URL,
-    siteName: person.name,
-    title: "Ankit Kumar Mishra | Engineering Lead and Full-Stack Engineer",
+    siteName: SITE_NAME,
+    title: TITLE,
     description: person.shortBio,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ankit Kumar Mishra | Engineering Lead and Full-Stack Engineer",
+    site: person.xHandle,
+    creator: person.xHandle,
+    title: TITLE,
     description: person.shortBio,
   },
   robots: {
@@ -92,8 +103,14 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
-  applicationName: person.name,
-  referrer: "origin-when-cross-origin",
+  classification: "Personal portfolio and resume of a software engineer",
+  applicationName: SITE_NAME,
+  appleWebApp: {
+    capable: true,
+    title: person.name,
+    statusBarStyle: "black-translucent",
+  },
+  referrer: "strict-origin-when-cross-origin",
   formatDetection: { telephone: false, address: false, email: false },
 };
 
@@ -126,6 +143,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+            identity verifiers (Mastodon, IndieWeb) and by search engines as a
+        {profiles.map((href) => (
+          <link key={href} rel="me" href={href} />
+        ))}
       </head>
       <body className="grain min-h-full">
         <a
@@ -140,6 +161,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Cursor />
           {children}
         </MotionProvider>
+        <Analytics />
       </body>
     </html>
   );

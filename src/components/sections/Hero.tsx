@@ -79,7 +79,7 @@ export function Hero() {
       >
         <div className="lg:col-span-7">
           <h1 className="h-display text-[clamp(2.9rem,8.4vw,6.1rem)] text-ink">
-            <LineUp delay={0.18}>Ankit Kumar</LineUp>
+            <LineUp delay={0.18}>Ankit Kumar</LineUp>{" "}
             <LineUp delay={0.3}>
               <span className="font-display pr-2 text-accent-ink">Mishra</span>
             </LineUp>

@@ -6,20 +6,45 @@ export const person = {
   companyLocation: "London, UK",
   location: "Mangalore, India",
   locationLong:
-    "Based in Mangalore, India. Six years inside fully distributed teams, most of them spread across the US, UK and EU.",
+    "Based in Mangalore, India. 6+ years inside fully distributed teams, most of them spread across the US, UK and EU.",
   locationShort: "Remote-first. US, UK and EU teams.",
   tagline:
-    "Full-Stack Engineer and Engineering Lead. Six years shipping production systems end to end.",
+    "Engineering Lead and Full-Stack Engineer. 6+ years shipping production systems end to end.",
   taglineSub:
     "TypeScript, Node.js, React, Next.js, PostgreSQL, AWS. Payment integrations, subscription billing, KYC and compliance flows, API performance, distributed systems, and LLM applications.",
   shortBio:
-    "Full-Stack Engineer and Engineering Lead. Six years in TypeScript, Node.js, React, PostgreSQL and AWS across payments, billing, KYC, compliance and LLM systems.",
+    "Engineering Lead and Full-Stack Engineer. 6+ years in TypeScript, Node.js, React, PostgreSQL and AWS across payments, billing, KYC, compliance and LLM systems.",
+  seoDescription:
+    "Ankit Kumar Mishra is an Engineering Lead and Full-Stack Engineer. 6+ years in TypeScript, Node.js, React and AWS across payments, billing, KYC and LLM systems.",
+  alternateNames: [
+    "Ankit Mishra",
+    "Ankit K. Mishra",
+    "Ankit K M",
+    "AKM",
+    "AnkitKumarMishra",
+    "ankitkumarmishra",
+    "AnkitKumarMishra5",
+  ],
+  jobTitles: [
+    "Engineering Lead",
+    "Staff Software Engineer",
+    "Senior Software Engineer",
+    "Full-Stack Engineer",
+    "Full Stack Engineer",
+    "Software Engineer",
+  ],
   email: "ankit5kumar14@gmail.com",
   linkedin: "https://www.linkedin.com/in/ankitkumarmishra/",
+  linkedinHandle: "ankitkumarmishra",
   github: "https://github.com/AnkitKumarMishra5",
+  githubHandle: "AnkitKumarMishra5",
+  x: "https://x.com/ankitkm_x",
+  xHandle: "@ankitkm_x",
   resume: "/AnkitKumarMishraResume.pdf",
   photo: "/ankit.jpg",
 } as const;
+
+export const profiles = [person.linkedin, person.github, person.x] as const;
 
 const industries = ["FinTech", "RegTech", "EdTech", "MediaTech"];
 
@@ -44,7 +69,7 @@ export const positioning =
   "I own systems end to end: schema design, API contracts, third-party integrations, performance work, and the on-call that follows. Most of it has been in regulated environments where every change is audited, so I default to idempotent writes, explicit state transitions, structured logging, and tests that prove the numbers reconcile. The same defaults hold whether the system moves money, streams game state, or calls a model.";
 
 export const about: string[] = [
-  "I'm a Full-Stack Engineer and Engineering Lead with 6+ years building systems that move money and verify people: payments, billing, KYC and compliance, and the infrastructure underneath them.",
+  "I'm Ankit Kumar Mishra, an Engineering Lead and Full-Stack Engineer with 6+ years building systems that move money and verify people: payments, billing, KYC and compliance, and the infrastructure underneath them.",
   "Most recently I was a Staff Software Engineer at TechPassport, a London RegTech platform, where I owned the monetization stack end to end. I built it from scratch: Stripe integration, subscription management, and the full billing schema. I also cut API response times by 75 to 80% across the platform's critical endpoints, and I ran the design-to-engineering pipeline in Figma, shipping features from concept to production.",
   "Before that I spent two years at Vested Finance, an investment platform handling live investor funds. I joined as a Software Engineer and was promoted twice in 12 months to Engineering Lead, running the KYC/Compliance and Premium Management squads as de facto product owner. We took onboarding from a single market to global users and unified subscription billing across Stripe, Razorpay, Google Play, and Apple in-app purchases.",
   "Outside work I build with LLMs (tool calling, RAG, agents, MCP) and have mentored 1,000+ developers as a Subject Matter Expert.",
@@ -370,7 +395,7 @@ export const projects: Project[] = [
       "Statements arrive locked. Outlay derives the password from the cardholder profile, trying fourteen issuer patterns in a preference order, and learns a new template from any password typed once, so the next card at that issuer opens unprompted. The file is unlocked and read in memory and never written to disk.",
       "Extraction is deterministic, with no model involved. Twelve checks then run before anything is persisted, the important one comparing computed debit and credit totals against the totals the bank printed, so a half-read statement announces itself instead of quietly skewing a year of numbers. The check record is stored with the statement.",
       "Every account is a tenant. Name, date of birth, card digits and statement passwords are sealed with AES-256-GCM under a key derived per account, so a leak scoped to one account cannot unseal another.",
-      "The only optional model call rereads merchant names when the category rules get them wrong, metered at two runs per card per month.",
+      "The only optional model call rereads merchant names when the category rules get them wrong. A whole upload batch goes in one call, metered at two reviews per card per month with the review reserved in the database before the model is called, and what changed is shown for a glance, never as a required step.",
     ],
     highlights: [
       { label: "Passwords", value: "14 derived patterns, new ones learned" },
@@ -385,7 +410,7 @@ export const projects: Project[] = [
     year: "2026",
     shot: "/shots/outlay.jpg",
     shotAlt:
-      "The Outlay dashboard: nineteen cards ranked by spend, headline totals, a bills panel showing seventeen of nineteen settled this cycle, a spend trend chart and a category split donut",
+      "The Outlay dashboard: nineteen cards ranked by spend, headline totals, a bills panel showing sixteen of eighteen settled this cycle with two overdue, six recurring charges detected, a spend trend chart and a category split donut",
     shotMobile: "/shots/outlay-mobile.jpg",
     shotMobileLabel: "the whole wallet, in a pocket",
     shotMobileAlt:
@@ -609,6 +634,35 @@ export const availability = {
   location: "Remote-first, worldwide. Open to relocating to the UK or the EU.",
 };
 
+export type Faq = { q: string; a: string };
+
+export const faqs: Faq[] = [
+  {
+    q: "Who is Ankit Kumar Mishra?",
+    a: "Ankit Kumar Mishra is an Engineering Lead and Full-Stack Engineer based in Mangalore, India, with 6+ years building production systems end to end. Most recently a Staff Software Engineer at TechPassport, a RegTech platform in London, where he owned the monetization stack. Before that, Engineering Lead at Vested Finance, an investment platform in Berkeley, California.",
+  },
+  {
+    q: "What does Ankit Kumar Mishra work on?",
+    a: "Systems that move money and verify people: payment integrations, subscription billing, KYC and compliance flows, and the APIs and databases underneath them. The stack is TypeScript, Node.js, React, Next.js, PostgreSQL and AWS. Outside regulated work he builds LLM applications with tool calling, RAG, agents and MCP.",
+  },
+  {
+    q: "Where is Ankit Kumar Mishra based?",
+    a: "Mangalore, Karnataka, India. He has worked remote-first for 6+ years across teams in the United States, the United Kingdom and the European Union, and is open to relocating to the UK or the EU.",
+  },
+  {
+    q: "Is Ankit Kumar Mishra available for hire?",
+    a: "Yes, available immediately. Full-time roles at Senior or Staff level, scoped contract and part-time delivery, and fractional CTO work. The fastest way to reach him is email at ankit5kumar14@gmail.com.",
+  },
+  {
+    q: "What has Ankit Kumar Mishra built?",
+    a: "At work: TechPassport's complete monetization stack from scratch, a 75 to 80% cut in API response times, and global KYC onboarding at Vested Finance. On his own time: a Solana trading terminal that settles on mainnet, a real-time multiplayer party game, an expense tracker that reconciles Indian credit card statements, and a private-markets assistant that never lets the model do arithmetic. All four are live and open source.",
+  },
+  {
+    q: "Does Ankit Kumar Mishra teach or mentor engineers?",
+    a: "Yes. He is a Subject Matter Expert and lead instructor across several engineering schools, including Codecademy, Coding Ninjas, Masai School, Cuvette and AccioJob, and has taught more than 50 batches of live courses and mentored over 1,000 developers.",
+  },
+];
+
 export const aiSuggestions = [
   "What has he actually shipped in payments?",
   "How did he cut API response times?",
@@ -700,8 +754,8 @@ export const reviewDiff = {
 export const profileLog = [
   "[boot]  resolving engineer profile ...",
   "[ok]    name         Ankit Kumar Mishra",
-  "[ok]    title        Full-Stack Engineer",
-  "[ok]    years        6",
+  "[ok]    title        Engineering Lead",
+  "[ok]    years        6+",
   "[ok]    based        Mangalore, India",
   "[ok]    remote       US, UK, EU",
   "",
@@ -743,13 +797,13 @@ export const sourceFiles: SourceFile[] = [
     out: [
       "[boot]  resolving engineer profile ...",
       "[ok]    name         Ankit Kumar Mishra",
-      "[ok]    years        6",
+      "[ok]    years        6+",
       "[ok]    based        Mangalore, India",
       "[ok]    available    true",
     ],
     code: `{
   "name": "Ankit Kumar Mishra",
-  "title": "Full-Stack Engineer and Engineering Lead",
+  "title": "Engineering Lead and Full-Stack Engineer",
   "based": "Mangalore, India",
   "years": 6,
   "depth": ["payments", "billing", "KYC", "compliance"],

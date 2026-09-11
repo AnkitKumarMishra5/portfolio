@@ -67,7 +67,7 @@ export default function OpengraphImage() {
               letterSpacing: "-0.02em",
             }}
           >
-            Six years shipping production systems end to end.
+            6+ years shipping production systems end to end.
           </div>
           <div
             style={{
