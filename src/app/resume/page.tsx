@@ -124,7 +124,7 @@ export default function ResumePage() {
           {experience.map((job) => (
             <article key={job.company}>
               <h3 className="text-[17px] font-medium tracking-[-0.01em] text-ink">
-                {job.company}
+                {job.company}{" "}
                 <span className="ml-2 text-[14px] font-normal text-ink-3">
                   {job.tenure}
                 </span>
@@ -136,7 +136,7 @@ export default function ResumePage() {
                 {job.roles.map((role) => (
                   <div key={role.title}>
                     <p className="text-[15px] font-medium text-ink">
-                      {role.title}
+                      {role.title}{" "}
                       <span className="ml-2 text-[13px] font-normal text-ink-4">
                         {role.period}
                       </span>

@@ -42,7 +42,6 @@ export function SectionHeading({
       </motion.div>
 
       <h2 className="h-display text-[clamp(2.1rem,5vw,3.6rem)] text-ink">
-            reads headings without seeing them: search engines building anchor
         <span className="sr-only">{kicker}: </span>
         <WordsUp text={title} />
         {accent ? (

@@ -143,7 +143,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-            identity verifiers (Mastodon, IndieWeb) and by search engines as a
         {profiles.map((href) => (
           <link key={href} rel="me" href={href} />
         ))}
