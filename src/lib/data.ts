@@ -410,11 +410,11 @@ export const projects: Project[] = [
     year: "2026",
     shot: "/shots/outlay.jpg",
     shotAlt:
-      "The Outlay dashboard: nineteen cards ranked by spend, headline totals, a bills panel showing sixteen of eighteen settled this cycle with two overdue, six recurring charges detected, a spend trend chart and a category split donut",
+      "The Outlay dashboard: a month selector above eight cards ranked by what they billed this cycle, headline totals for due, billed spends and credits, a bills panel showing five of eight settled with the amount still outstanding, a chart of how the bill built up day by day and a category split donut",
     shotMobile: "/shots/outlay-mobile.jpg",
     shotMobileLabel: "the whole wallet, in a pocket",
     shotMobileAlt:
-      "Outlay on a phone: the featured credit card above a list of cards ranked by spend, each with its due date and outstanding amount",
+      "Outlay on a phone: the month selector, the card with the largest bill outstanding, and the rest of the wallet ranked by what each card is due, with amounts and due dates",
   },
   {
     name: "Investor Copilot",
