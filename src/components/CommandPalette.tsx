@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { navLinks, person, projects } from "@/lib/data";
 import { IconCheck, IconSearch } from "./ui/Icons";
 import { trackAction } from "./Analytics";
+import { toggleThemeFromButton } from "@/lib/theme";
 
 type Item = {
   id: string;
@@ -121,14 +122,8 @@ export function CommandPalette() {
         hint: "Appearance",
         group: "Settings",
         run: () => {
-          const el = document.documentElement;
-          const next = el.dataset.theme === "light" ? "dark" : "light";
-          el.dataset.theme = next;
-          try {
-            localStorage.setItem("theme", next);
-          } catch {
-          }
           setOpen(false);
+          window.setTimeout(toggleThemeFromButton, 180);
         },
       },
     ];

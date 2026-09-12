@@ -1,19 +1,17 @@
 "use client";
 
+import { toggleTheme } from "@/lib/theme";
+
 export function ThemeToggle({ className = "" }: { className?: string }) {
-  const toggle = () => {
-    const el = document.documentElement;
-    const next = el.dataset.theme === "light" ? "dark" : "light";
-    el.dataset.theme = next;
-    try {
-      localStorage.setItem("theme", next);
-    } catch {
-    }
+  const toggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    toggleTheme({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
   };
 
   return (
     <button
       onClick={toggle}
+      data-theme-toggle
       aria-label="Toggle light and dark theme"
       className={`relative grid size-9 place-items-center rounded-full border border-line-2 text-ink-2 transition-colors hover:border-line-3 hover:text-ink ${className}`}
     >

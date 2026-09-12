@@ -24,7 +24,7 @@ export function GET() {
 
 > ${person.shortBio}
 
-${person.headline}. Most recently ${person.role} at ${person.company} (${person.companyLocation}). ${person.locationLong}
+${person.headline}. ${person.role} at ${person.company} (${person.companyLocation}). ${person.locationLong}
 
 - Email: ${person.email}
 - LinkedIn: ${person.linkedin}

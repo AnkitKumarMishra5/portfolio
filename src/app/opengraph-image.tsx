@@ -67,7 +67,7 @@ export default function OpengraphImage() {
               letterSpacing: "-0.02em",
             }}
           >
-            6+ years shipping production systems end to end.
+            7+ years shipping production systems end to end.
           </div>
           <div
             style={{
@@ -91,7 +91,7 @@ export default function OpengraphImage() {
             paddingTop: 24,
           }}
         >
-          <div style={{ display: "flex" }}>6+ years</div>
+          <div style={{ display: "flex" }}>7+ years</div>
           <div style={{ display: "flex" }}>·</div>
           <div style={{ display: "flex" }}>75-80% faster APIs</div>
           <div style={{ display: "flex" }}>·</div>

@@ -29,6 +29,7 @@ export const personNode = {
   familyName: "Mishra",
   identifier: person.githubHandle,
   jobTitle: [...person.jobTitles],
+  worksFor: { "@type": "Organization", name: person.company },
   description: person.shortBio,
   email: `mailto:${person.email}`,
   url: SITE_URL,

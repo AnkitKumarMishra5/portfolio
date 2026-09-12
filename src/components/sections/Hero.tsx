@@ -246,7 +246,7 @@ export function Hero() {
                     </p>
                   </div>
                   <span className="mono rounded-full border border-line-2 bg-bg/60 px-2.5 py-1 text-[10px] text-ink-2 backdrop-blur-md">
-                    6+ yrs
+                    7+ yrs
                   </span>
                 </div>
               </div>

@@ -6,16 +6,16 @@ export const person = {
   companyLocation: "London, UK",
   location: "Mangalore, India",
   locationLong:
-    "Based in Mangalore, India. 6+ years inside fully distributed teams, most of them spread across the US, UK and EU.",
+    "Based in Mangalore, India. 7+ years inside fully distributed teams, most of them spread across the US, UK and EU.",
   locationShort: "Remote-first. US, UK and EU teams.",
   tagline:
-    "Engineering Lead and Full-Stack Engineer. 6+ years shipping production systems end to end.",
+    "Engineering Lead and Full-Stack Engineer. 7+ years shipping production systems end to end.",
   taglineSub:
     "TypeScript, Node.js, React, Next.js, PostgreSQL, AWS. Payment integrations, subscription billing, KYC and compliance flows, API performance, distributed systems, and LLM applications.",
   shortBio:
-    "Engineering Lead and Full-Stack Engineer. 6+ years in TypeScript, Node.js, React, PostgreSQL and AWS across payments, billing, KYC, compliance and LLM systems.",
+    "Engineering Lead and Full-Stack Engineer. 7+ years in TypeScript, Node.js, React, PostgreSQL and AWS across payments, billing, KYC, compliance and LLM systems.",
   seoDescription:
-    "Ankit Kumar Mishra is an Engineering Lead and Full-Stack Engineer. 6+ years in TypeScript, Node.js, React and AWS across payments, billing, KYC and LLM systems.",
+    "Ankit Kumar Mishra is an Engineering Lead and Full-Stack Engineer. 7+ years in TypeScript, Node.js, React and AWS across payments, billing, KYC and LLM systems.",
   alternateNames: [
     "Ankit Mishra",
     "Ankit K. Mishra",
@@ -69,8 +69,8 @@ export const positioning =
   "I own systems end to end: schema design, API contracts, third-party integrations, performance work, and the on-call that follows. Most of it has been in regulated environments where every change is audited, so I default to idempotent writes, explicit state transitions, structured logging, and tests that prove the numbers reconcile. The same defaults hold whether the system moves money, streams game state, or calls a model.";
 
 export const about: string[] = [
-  "I'm Ankit Kumar Mishra, an Engineering Lead and Full-Stack Engineer with 6+ years building systems that move money and verify people: payments, billing, KYC and compliance, and the infrastructure underneath them.",
-  "Most recently I was a Staff Software Engineer at TechPassport, a London RegTech platform, where I owned the monetization stack end to end. I built it from scratch: Stripe integration, subscription management, and the full billing schema. I also cut API response times by 75 to 80% across the platform's critical endpoints, and I ran the design-to-engineering pipeline in Figma, shipping features from concept to production.",
+  "I'm Ankit Kumar Mishra, an Engineering Lead and Full-Stack Engineer with 7+ years building systems that move money and verify people: payments, billing, KYC and compliance, and the infrastructure underneath them.",
+  "I'm a Staff Software Engineer at TechPassport, a London RegTech platform, where I own the monetization stack end to end. I built it from scratch: Stripe integration, subscription management, and the full billing schema. I also cut API response times by 75 to 80% across the platform's critical endpoints, and I run the design-to-engineering pipeline in Figma, shipping features from concept to production.",
   "Before that I spent two years at Vested Finance, an investment platform handling live investor funds. I joined as a Software Engineer and was promoted twice in 12 months to Engineering Lead, running the KYC/Compliance and Premium Management squads as de facto product owner. We took onboarding from a single market to global users and unified subscription billing across Stripe, Razorpay, Google Play, and Apple in-app purchases.",
   "Outside work I build with LLMs (tool calling, RAG, agents, MCP) and have mentored 1,000+ developers as a Subject Matter Expert.",
 ];
@@ -85,7 +85,7 @@ type Stat = {
 };
 
 export const stats: Stat[] = [
-  { value: 6, suffix: "+", label: "years in production engineering" },
+  { value: 7, suffix: "+", label: "years in production engineering" },
   { value: 2, label: "promotions in 12 months" },
   {
     value: 50,
@@ -108,7 +108,7 @@ export const stats: Stat[] = [
 ];
 
 export const heroStats = [
-  { value: "Staff", label: "most recent level" },
+  { value: "Staff", label: "engineering level" },
   { value: "0 to 1", label: "monetization stack owned" },
   { value: "4", label: "side projects featured here, all live" },
 ];
@@ -133,15 +133,15 @@ export const experience: Company[] = [
   {
     company: "TechPassport",
     location: "London, UK (Remote)",
-    tenure: "3 yrs 4 mos",
-    span: "May 2023 to Sept 2026",
+    tenure: "3+ yrs",
+    span: "May 2023 to Present",
     roles: [
       {
         title: "Staff Software Engineer",
-        period: "May 2023 to Sept 2026",
-        duration: "3 yrs 4 mos",
+        period: "May 2023 to Present",
+        duration: "3+ yrs",
         points: [
-          "Architected and owned the complete monetization stack from scratch: Stripe payment integration, subscription management, and the full billing schema.",
+          "Architected and own the complete monetization stack from scratch: Stripe payment integration, subscription management, and the full billing schema.",
           "Cut API response times by 75 to 80% through caching strategies, query optimization, and async refactoring across high-traffic endpoints.",
           "Engineered configurable supplier workflows with buyer-driven dynamic forms and complex D3.js relational data visualizations, expanding the product's core analytical capabilities.",
           "Drove the full design-to-engineering pipeline in Figma, with 10+ features shipped end to end from concept to production.",
@@ -358,6 +358,36 @@ export const projects: Project[] = [
       "The Crypto Trading App trading view with a candlestick price chart, market cap and liquidity stats, a safety and rug check panel, and an AI token intel summary",
   },
   {
+    name: "Outlay",
+    kicker: "Every card you hold, reconciled every month",
+    summary:
+      "An expense tracker, validator and analyser for Indian credit card statements. It opens the password-protected PDF your bank emails you, checks its arithmetic, and turns a wallet of cards into one screen.",
+    detail: [
+      "Statements arrive locked. Outlay derives the password from the cardholder profile, trying fourteen issuer patterns in a preference order, and learns a new template from any password typed once, so the next card at that issuer opens unprompted. The file is unlocked and read in memory and never written to disk.",
+      "Extraction is deterministic, with no model involved. Twelve checks then run before anything is persisted, the important one comparing computed debit and credit totals against the totals the bank printed, so a half-read statement announces itself instead of quietly skewing a year of numbers. The check record is stored with the statement.",
+      "Every account is a tenant. Name, date of birth, card digits and statement passwords are sealed with AES-256-GCM under a key derived per account, so a leak scoped to one account cannot unseal another.",
+      "The only optional model call rereads merchant names when the category rules get them wrong. A whole upload batch goes in one call, metered at two reviews per card per month with the review reserved in the database before the model is called, and what changed is shown for a glance, never as a required step.",
+    ],
+    highlights: [
+      { label: "Passwords", value: "14 derived patterns, new ones learned" },
+      { label: "Verification", value: "12 checks against the printed totals" },
+      { label: "Encryption", value: "AES-256-GCM, per-account keys" },
+      { label: "Statements", value: "Parsed in memory, never written to disk" },
+    ],
+    stack: ["Next.js 16", "TypeScript", "Tailwind v4", "Postgres", "pdf.js", "Recharts", "Neon", "Vercel"],
+    live: "https://outlay-expense-tracker.vercel.app/",
+    liveLabel: "outlay-expense-tracker.vercel.app",
+    repo: "https://github.com/AnkitKumarMishra5/outlay-expense-tracker",
+    year: "2026",
+    shot: "/shots/outlay.jpg",
+    shotAlt:
+      "The Outlay dashboard: a month selector above eight cards ranked by what they billed this cycle, headline totals for due, spends and credits, a bills panel showing five of eight settled with the amount still outstanding, a chart of how the bill built up day by day and a category split donut",
+    shotMobile: "/shots/outlay-mobile.jpg",
+    shotMobileLabel: "the whole wallet, in a pocket",
+    shotMobileAlt:
+      "Outlay on a phone: the month selector, the card with the largest bill outstanding, and the rest of the wallet ranked by what each card is due, with amounts and due dates",
+  },
+  {
     name: "Game Night",
     kicker: "Real-time party games, one room code away",
     summary:
@@ -385,36 +415,6 @@ export const projects: Project[] = [
       "Game Night on a phone: enter a name, then create a room or join with a five-letter code",
     shotAlt:
       "The Game Night landing screen, where a player enters a name and either creates a room or joins with a code",
-  },
-  {
-    name: "Outlay",
-    kicker: "Every card you hold, reconciled every month",
-    summary:
-      "An expense tracker, validator and analyser for Indian credit card statements. It opens the password-protected PDF your bank emails you, checks its arithmetic, and turns a wallet of cards into one screen.",
-    detail: [
-      "Statements arrive locked. Outlay derives the password from the cardholder profile, trying fourteen issuer patterns in a preference order, and learns a new template from any password typed once, so the next card at that issuer opens unprompted. The file is unlocked and read in memory and never written to disk.",
-      "Extraction is deterministic, with no model involved. Twelve checks then run before anything is persisted, the important one comparing computed debit and credit totals against the totals the bank printed, so a half-read statement announces itself instead of quietly skewing a year of numbers. The check record is stored with the statement.",
-      "Every account is a tenant. Name, date of birth, card digits and statement passwords are sealed with AES-256-GCM under a key derived per account, so a leak scoped to one account cannot unseal another.",
-      "The only optional model call rereads merchant names when the category rules get them wrong. A whole upload batch goes in one call, metered at two reviews per card per month with the review reserved in the database before the model is called, and what changed is shown for a glance, never as a required step.",
-    ],
-    highlights: [
-      { label: "Passwords", value: "14 derived patterns, new ones learned" },
-      { label: "Verification", value: "12 checks against the printed totals" },
-      { label: "Encryption", value: "AES-256-GCM, per-account keys" },
-      { label: "Statements", value: "Parsed in memory, never written to disk" },
-    ],
-    stack: ["Next.js 16", "TypeScript", "Tailwind v4", "Postgres", "pdf.js", "Recharts", "Neon", "Vercel"],
-    live: "https://outlay-expense-tracker.vercel.app/",
-    liveLabel: "outlay-expense-tracker.vercel.app",
-    repo: "https://github.com/AnkitKumarMishra5/outlay-expense-tracker",
-    year: "2026",
-    shot: "/shots/outlay.jpg",
-    shotAlt:
-      "The Outlay dashboard: a month selector above eight cards ranked by what they billed this cycle, headline totals for due, billed spends and credits, a bills panel showing five of eight settled with the amount still outstanding, a chart of how the bill built up day by day and a category split donut",
-    shotMobile: "/shots/outlay-mobile.jpg",
-    shotMobileLabel: "the whole wallet, in a pocket",
-    shotMobileAlt:
-      "Outlay on a phone: the month selector, the card with the largest bill outstanding, and the rest of the wallet ranked by what each card is due, with amounts and due dates",
   },
   {
     name: "Investor Copilot",
@@ -521,7 +521,7 @@ export const navLinks = [
 ];
 
 export const companies = [
-  { name: "TechPassport", detail: "RegTech, London", years: "2023 to 2026" },
+  { name: "TechPassport", detail: "RegTech, London", years: "2023 to present" },
   { name: "Vested Finance", detail: "Investing, Berkeley", years: "2021 to 2023" },
   { name: "GiveIndia", detail: "Donations, Bengaluru", years: "2021" },
   { name: "Pratilipi", detail: "Storytelling, Bengaluru", years: "2020 to 2021" },
@@ -639,7 +639,7 @@ export type Faq = { q: string; a: string };
 export const faqs: Faq[] = [
   {
     q: "Who is Ankit Kumar Mishra?",
-    a: "Ankit Kumar Mishra is an Engineering Lead and Full-Stack Engineer based in Mangalore, India, with 6+ years building production systems end to end. Most recently a Staff Software Engineer at TechPassport, a RegTech platform in London, where he owned the monetization stack. Before that, Engineering Lead at Vested Finance, an investment platform in Berkeley, California.",
+    a: "Ankit Kumar Mishra is an Engineering Lead and Full-Stack Engineer based in Mangalore, India, with 7+ years building production systems end to end. He is a Staff Software Engineer at TechPassport, a RegTech platform in London, where he owns the monetization stack. Before that, Engineering Lead at Vested Finance, an investment platform in Berkeley, California.",
   },
   {
     q: "What does Ankit Kumar Mishra work on?",
@@ -647,7 +647,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "Where is Ankit Kumar Mishra based?",
-    a: "Mangalore, Karnataka, India. He has worked remote-first for 6+ years across teams in the United States, the United Kingdom and the European Union, and is open to relocating to the UK or the EU.",
+    a: "Mangalore, Karnataka, India. He has worked remote-first for 7+ years across teams in the United States, the United Kingdom and the European Union, and is open to relocating to the UK or the EU.",
   },
   {
     q: "Is Ankit Kumar Mishra available for hire?",
@@ -655,7 +655,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "What has Ankit Kumar Mishra built?",
-    a: "At work: TechPassport's complete monetization stack from scratch, a 75 to 80% cut in API response times, and global KYC onboarding at Vested Finance. On his own time: a Solana trading terminal that settles on mainnet, a real-time multiplayer party game, an expense tracker that reconciles Indian credit card statements, and a private-markets assistant that never lets the model do arithmetic. All four are live and open source.",
+    a: "At work: TechPassport's complete monetization stack from scratch, a 75 to 80% cut in API response times, and global KYC onboarding at Vested Finance. On his own time: a Solana trading terminal that settles on mainnet, an expense tracker that reconciles Indian credit card statements, a real-time multiplayer party game, and a private-markets assistant that never lets the model do arithmetic. All four are live and open source.",
   },
   {
     q: "Does Ankit Kumar Mishra teach or mentor engineers?",
@@ -755,7 +755,7 @@ export const profileLog = [
   "[boot]  resolving engineer profile ...",
   "[ok]    name         Ankit Kumar Mishra",
   "[ok]    title        Engineering Lead",
-  "[ok]    years        6+",
+  "[ok]    years        7+",
   "[ok]    based        Mangalore, India",
   "[ok]    remote       US, UK, EU",
   "",
@@ -797,7 +797,7 @@ export const sourceFiles: SourceFile[] = [
     out: [
       "[boot]  resolving engineer profile ...",
       "[ok]    name         Ankit Kumar Mishra",
-      "[ok]    years        6+",
+      "[ok]    years        7+",
       "[ok]    based        Mangalore, India",
       "[ok]    available    true",
     ],
@@ -805,7 +805,7 @@ export const sourceFiles: SourceFile[] = [
   "name": "Ankit Kumar Mishra",
   "title": "Engineering Lead and Full-Stack Engineer",
   "based": "Mangalore, India",
-  "years": 6,
+  "years": 7,
   "depth": ["payments", "billing", "KYC", "compliance"],
   "range": ["web apps", "APIs", "real-time", "LLM products"],
   "available": true
@@ -837,16 +837,16 @@ export const sourceFiles: SourceFile[] = [
     cmd: "tenure --summary",
     out: [
       "[calc]  summing tenures ...",
-      "[ok]    TechPassport     3 yrs 4 mos",
+      "[ok]    TechPassport     3+ yrs",
       "[ok]    Vested Finance   2 yrs     (2 promotions)",
       "[ok]    GiveIndia        6 mos",
       "[ok]    Pratilipi        6 mos",
-      "[ok]    total            6 yrs+",
+      "[ok]    total            7 yrs+",
     ],
     code: `[
   {
     "company": "TechPassport",
-    "tenure": "3 yrs 4 mos",
+    "tenure": "3+ yrs",
     "role": "Staff Software Engineer",
     "owned": ["monetization stack", "Stripe", "billing schema"],
     "shipped": "API latency down 75-80%"

@@ -70,7 +70,7 @@ function rateLimit(ip: string): { ok: boolean; retryAfter: number } {
 
 function buildFacts() {
   return [
-    `NAME: ${person.name}. ${person.headline}. Most recently ${person.role} at ${person.company} (${person.companyLocation}). ${person.locationLong} Contact: ${person.email}.`,
+    `NAME: ${person.name}. ${person.headline}. ${person.role} at ${person.company} (${person.companyLocation}). ${person.locationLong} Contact: ${person.email}.`,
     `BIO: ${about.join(" ")}`,
     `POSITIONING: ${positioning}`,
     `EXPERIENCE:\n${experience

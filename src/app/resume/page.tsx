@@ -77,7 +77,7 @@ export default function ResumePage() {
         </h1>
         <p className="mt-3 text-[17px] text-ink-2">{person.headline}</p>
         <p className="mt-1.5 text-[15px] text-ink-3">
-          Most recently {person.role} at {person.company}, {person.companyLocation}
+          {person.role} at {person.company}, {person.companyLocation}
         </p>
         <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[14px]">
           <li>

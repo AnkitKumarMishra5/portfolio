@@ -110,7 +110,7 @@ export function About() {
 
               <Fact label="Most recent" value={`${person.role}, ${person.company} (${person.companyLocation})`} />
               <Fact label="Based" value={person.locationLong} />
-              <Fact label="Experience" value="6+ years across FinTech, RegTech, EdTech, and MediaTech" />
+              <Fact label="Experience" value="7+ years across FinTech, RegTech, EdTech, and MediaTech" />
               <Fact
                 label="Core stack"
                 value="JavaScript, TypeScript, React, Next.js, Node.js, PostgreSQL, MongoDB, AWS"
