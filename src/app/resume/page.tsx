@@ -16,14 +16,14 @@ import { IconArrowUpRight, IconDownload } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
   title: "Resume",
-  description: `Full resume for ${person.name}: ${person.headline}. Payments, billing, KYC and compliance, API performance, and LLM systems across FinTech and RegTech.`,
+  description: `Full resume for ${person.name}: ${person.headline}. FinTech, RegTech, KYC and compliance, payments, API performance and LLM systems.`,
   alternates: {
     canonical: "/resume",
     types: { "application/pdf": absolute(person.resume) },
   },
   openGraph: {
     title: `Resume | ${person.name}`,
-    description: `${person.headline}. Payments, billing, KYC and compliance, API performance, and LLM systems across FinTech and RegTech.`,
+    description: `${person.headline}. FinTech, RegTech, KYC and compliance, payments, API performance and LLM systems.`,
     url: `${SITE_URL}/resume`,
   },
   twitter: {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     site: person.xHandle,
     creator: person.xHandle,
     title: `Resume | ${person.name}`,
-    description: `${person.headline}. Payments, billing, KYC and compliance, API performance, and LLM systems across FinTech and RegTech.`,
+    description: `${person.headline}. FinTech, RegTech, KYC and compliance, payments, API performance and LLM systems.`,
   },
 };
 

@@ -11,11 +11,11 @@ export const person = {
   tagline:
     "Engineering Lead and Full-Stack Engineer. 7+ years shipping production systems end to end.",
   taglineSub:
-    "TypeScript, Node.js, React, Next.js, PostgreSQL, AWS. Payment integrations, subscription billing, KYC and compliance flows, API performance, distributed systems, and LLM applications.",
+    "TypeScript, Node.js, React, Next.js, PostgreSQL, AWS. FinTech and RegTech platforms: KYC and compliance flows, payment integrations, API performance, distributed systems, and LLM applications.",
   shortBio:
-    "Engineering Lead and Full-Stack Engineer. 7+ years in TypeScript, Node.js, React, PostgreSQL and AWS across payments, billing, KYC, compliance and LLM systems.",
+    "Engineering Lead and Full-Stack Engineer with 7+ years across FinTech, RegTech, KYC and compliance, and LLM systems. TypeScript, Node.js, React, PostgreSQL, AWS.",
   seoDescription:
-    "Ankit Kumar Mishra is an Engineering Lead and Full-Stack Engineer. 7+ years in TypeScript, Node.js, React and AWS across payments, billing, KYC and LLM systems.",
+    "Ankit Kumar Mishra, Engineering Lead and Full-Stack Engineer. 7+ years across FinTech, RegTech, KYC and compliance, and LLM systems in TypeScript and AWS.",
   alternateNames: [
     "Ankit Mishra",
     "Ankit K. Mishra",
