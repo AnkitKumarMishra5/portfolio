@@ -164,7 +164,14 @@ export default function ResumePage() {
         </div>
       </Block>
 
-      <Block title="Projects">
+      <Block title="Selected projects">
+        <p className="mb-6 text-[13.5px] text-ink-3">
+          A selection of my work. More on{" "}
+          <a href={person.github} target="_blank" rel="noopener noreferrer" className="text-accent-ink link-sweep">
+            GitHub
+          </a>
+          .
+        </p>
         <div className="space-y-7">
           {projects.map((p) => (
             <article key={p.name}>

@@ -1,54 +1,51 @@
 export type Theme = "light" | "dark";
 
-type Origin = { x: number; y: number };
-type StartViewTransition = (update: () => void) => { ready: Promise<void> };
+type Transition = { ready: Promise<void>; finished: Promise<void> };
+type Starter = (update: () => void) => Transition;
+
+const DURATION = 900;
+const EASE = "cubic-bezier(0.76, 0, 0.24, 1)";
+let switching = false;
 
 export function currentTheme(): Theme {
   return document.documentElement.dataset.theme === "light" ? "light" : "dark";
 }
 
-function apply(next: Theme) {
-  document.documentElement.dataset.theme = next;
+function commit(next: Theme) {
+  const root = document.documentElement;
+  root.classList.add("theme-switching");
+  root.dataset.theme = next;
   try {
     localStorage.setItem("theme", next);
   } catch {}
 }
 
-export function toggleTheme(origin?: Origin) {
+function release() {
+  document.documentElement.classList.remove("theme-switching");
+  switching = false;
+}
+
+export function toggleTheme() {
+  if (switching) return;
+  switching = true;
   const next: Theme = currentTheme() === "light" ? "dark" : "light";
-  const root = document.documentElement;
+  const start = (document as unknown as { startViewTransition?: Starter }).startViewTransition;
 
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    apply(next);
+  if (!start || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    commit(next);
+    requestAnimationFrame(() => requestAnimationFrame(release));
     return;
   }
 
-  const start = (document as unknown as { startViewTransition?: StartViewTransition }).startViewTransition;
-
-  if (!start) {
-    root.classList.add("theme-fade");
-    apply(next);
-    window.setTimeout(() => root.classList.remove("theme-fade"), 560);
-    return;
-  }
-
-  const x = origin?.x ?? innerWidth / 2;
-  const y = origin?.y ?? innerHeight / 2;
-  const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-
-  const transition = start.call(document, () => apply(next));
+  const transition = start.call(document, () => commit(next));
   transition.ready
     .then(() => {
-      root.animate(
-        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-        { duration: 700, easing: "cubic-bezier(0.65, 0, 0.35, 1)", pseudoElement: "::view-transition-new(root)" }
+      const from = next === "light" ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)";
+      document.documentElement.animate(
+        { clipPath: [from, "inset(0 0 0 0)"] },
+        { duration: DURATION, easing: EASE, pseudoElement: "::view-transition-new(root)" }
       );
     })
     .catch(() => {});
-}
-
-export function toggleThemeFromButton() {
-  const button = document.querySelector<HTMLElement>("[data-theme-toggle]");
-  const rect = button?.getBoundingClientRect();
-  toggleTheme(rect && rect.width ? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 } : undefined);
+  transition.finished.then(release, release);
 }

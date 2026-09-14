@@ -4,6 +4,7 @@ import Image from "next/image";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { availability, heroRotator, heroStats, heroTags, person } from "@/lib/data";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 import { Aurora } from "../ui/Aurora";
 import { ParticleField } from "../ui/ParticleField";
 import { LineUp } from "../ui/TextReveal";
@@ -55,6 +56,7 @@ export function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
   const photoY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const touch = useMediaQuery("(pointer: coarse)");
 
   return (
     <section
@@ -74,7 +76,7 @@ export function Hero() {
       />
 
       <motion.div
-        style={{ y, opacity, scale }}
+        style={touch ? undefined : { y, opacity, scale }}
         className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-14 px-6 lg:grid-cols-12 lg:gap-10"
       >
         <div className="lg:col-span-7">
@@ -199,7 +201,7 @@ export function Hero() {
         </div>
 
         <motion.div
-          style={{ y: photoY }}
+          style={touch ? undefined : { y: photoY }}
           className="relative mx-auto w-full max-w-[330px] lg:col-span-5 lg:max-w-none"
         >
           <motion.div

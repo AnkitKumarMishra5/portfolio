@@ -104,7 +104,7 @@ export function Experience() {
         kicker="Experience"
         title="Where I have shipped,"
         accent="and for how long."
-        intro="Three years and four months at TechPassport. Two at Vested Finance, with two promotions inside twelve months."
+        intro="More than three years at TechPassport. Two at Vested Finance, with two promotions inside twelve months."
       />
 
       <div className="mt-14 grid gap-10 xl:grid-cols-[1fr_300px]">

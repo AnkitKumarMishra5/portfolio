@@ -110,7 +110,7 @@ export const stats: Stat[] = [
 export const heroStats = [
   { value: "Staff", label: "engineering level" },
   { value: "0 to 1", label: "monetization stack owned" },
-  { value: "4", label: "side projects featured here, all live" },
+  { value: "1,000+", label: "developers mentored" },
 ];
 
 type Role = {
@@ -364,13 +364,13 @@ export const projects: Project[] = [
       "An expense tracker, validator and analyser for Indian credit card statements. It opens the password-protected PDF your bank emails you, checks its arithmetic, and turns a wallet of cards into one screen.",
     detail: [
       "Statements arrive locked. Outlay derives the password from the cardholder profile, trying fourteen issuer patterns in a preference order, and learns a new template from any password typed once, so the next card at that issuer opens unprompted. The file is unlocked and read in memory and never written to disk.",
-      "Extraction is deterministic, with no model involved. Twelve checks then run before anything is persisted, the important one comparing computed debit and credit totals against the totals the bank printed, so a half-read statement announces itself instead of quietly skewing a year of numbers. The check record is stored with the statement.",
+      "Extraction is deterministic, with no model involved. Up to thirteen checks then run before anything is persisted, the important ones comparing computed debit and credit totals against the totals the bank printed, so a half-read statement announces itself instead of quietly skewing a year of numbers. The check record is stored with the statement.",
       "Every account is a tenant. Name, date of birth, card digits and statement passwords are sealed with AES-256-GCM under a key derived per account, so a leak scoped to one account cannot unseal another.",
       "The only optional model call rereads merchant names when the category rules get them wrong. A whole upload batch goes in one call, metered at two reviews per card per month with the review reserved in the database before the model is called, and what changed is shown for a glance, never as a required step.",
     ],
     highlights: [
       { label: "Passwords", value: "14 derived patterns, new ones learned" },
-      { label: "Verification", value: "12 checks against the printed totals" },
+      { label: "Verification", value: "Up to 13 checks against the printed totals" },
       { label: "Encryption", value: "AES-256-GCM, per-account keys" },
       { label: "Statements", value: "Parsed in memory, never written to disk" },
     ],
@@ -395,12 +395,12 @@ export const projects: Project[] = [
     detail: [
       "An authoritative Node and Socket.IO server sends per-player state snapshots, so no client ever holds information its player should not see.",
       "The client is a zero-build vanilla JavaScript PWA. Five games ship with it, including social deduction, a co-operative counting puzzle, and an AI-judged rule-guessing game.",
-      "LLM game logic is hardened against prompt injection, and 232 end-to-end checks drive real socket clients against the server.",
+      "LLM game logic is hardened against prompt injection, and 568 end-to-end checks drive real socket clients against the server.",
     ],
     highlights: [
       { label: "Server", value: "Authoritative, per-player snapshots" },
       { label: "Client", value: "Zero-build vanilla JS PWA" },
-      { label: "Tests", value: "232 end-to-end checks on real sockets" },
+      { label: "Tests", value: "568 end-to-end checks on real sockets" },
       { label: "LLM", value: "Game logic hardened against injection" },
     ],
     stack: ["Node.js", "Socket.IO", "Vanilla JS", "PWA", "OpenAI", "Render"],
@@ -655,7 +655,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "What has Ankit Kumar Mishra built?",
-    a: "At work: TechPassport's complete monetization stack from scratch, a 75 to 80% cut in API response times, and global KYC onboarding at Vested Finance. On his own time: a Solana trading terminal that settles on mainnet, an expense tracker that reconciles Indian credit card statements, a real-time multiplayer party game, and a private-markets assistant that never lets the model do arithmetic. All four are live and open source.",
+    a: "At work: TechPassport's complete monetization stack from scratch, a 75 to 80% cut in API response times, and global KYC onboarding at Vested Finance. On his own time: a Solana trading terminal that settles on mainnet, an expense tracker that reconciles Indian credit card statements, a real-time multiplayer party game, and a private-markets assistant that never lets the model do arithmetic. Those are the featured ones, all live and open source, with more on his GitHub.",
   },
   {
     q: "Does Ankit Kumar Mishra teach or mentor engineers?",
@@ -806,8 +806,8 @@ export const sourceFiles: SourceFile[] = [
   "title": "Engineering Lead and Full-Stack Engineer",
   "based": "Mangalore, India",
   "years": 7,
-  "depth": ["payments", "billing", "KYC", "compliance"],
-  "range": ["web apps", "APIs", "real-time", "LLM products"],
+  "depth": ["payments and billing", "KYC and compliance", "API performance", "LLM systems"],
+  "range": ["web apps", "APIs", "real-time multiplayer", "data visualisation"],
   "available": true
 }`,
   },
@@ -817,17 +817,18 @@ export const sourceFiles: SourceFile[] = [
     cmd: "rules --check",
     out: [
       "[scan]  reading principles.json ...",
-      "[ok]    spec before code",
-      "[ok]    idempotent writes, explicit transitions",
-      "[ok]    nothing merges unexplained",
-      "[warn]  on-call is not a handoff",
+      "[ok]    ownership       schema to on-call",
+      "[ok]    spec            before the code",
+      "[ok]    review          nothing merges unexplained",
+      "[ok]    agents          draft, then every diff reviewed",
+      "[done]  on-call is part of the job",
     ],
     code: `{
+  "ownership": "End to end: schema, API contracts, release and the on-call after.",
   "specFirst": "The spec comes before the code.",
-  "writes": "Idempotent. Explicit state transitions.",
   "review": "Nothing merges that I cannot explain.",
-  "observability": "Structured logging beats a debugger at 3am.",
-  "tests": "They prove the numbers reconcile.",
+  "agents": "Agents draft. I review every diff.",
+  "observability": "Structured logs beat a debugger at 3am.",
   "onCall": "Part of the job, not a handoff."
 }`,
   },
@@ -849,63 +850,20 @@ export const sourceFiles: SourceFile[] = [
     "tenure": "3+ yrs",
     "role": "Staff Software Engineer",
     "owned": ["monetization stack", "Stripe", "billing schema"],
-    "shipped": "API latency down 75-80%"
+    "shipped": "API latency down 75-80%",
+    "how": ["caching", "query optimization", "async refactoring"]
   },
   {
     "company": "Vested Finance",
     "tenure": "2 yrs",
     "role": "Engineering Lead",
     "squads": ["KYC/Compliance", "Premium Management"],
+    "team": "5+ engineers inside a 15+ member cross-functional team",
     "promotions": 2
   },
   { "company": "GiveIndia", "tenure": "6 mos" },
   { "company": "Pratilipi", "tenure": "6 mos" }
 ]`,
-  },
-  {
-    folder: "work",
-    name: "billing.json",
-    cmd: "billing providers --list",
-    out: [
-      "[scan]  enumerating providers ...",
-      "[ok]    stripe          subscriptions, invoices",
-      "[ok]    razorpay        India rails",
-      "[ok]    google play     in-app purchase",
-      "[ok]    apple iap       in-app purchase",
-      "[ok]    reconciled      one subscription state",
-    ],
-    code: `{
-  "problem": "Four billing providers, one subscription truth.",
-  "providers": ["Stripe", "Razorpay", "Google Play", "Apple IAP"],
-  "unified": ["plans", "renewals", "cancellations", "refunds"],
-  "surfaces": ["web", "iOS", "Android"],
-  "ledger": "double entry, posted in one transaction",
-  "result": "a single subscription state, whatever the customer paid with"
-}`,
-  },
-  {
-    folder: "work",
-    name: "kyc.json",
-    cmd: "onboarding verify --region auto",
-    out: [
-      "[net]   resolving applicant region ...",
-      "[ok]    region          resolved",
-      "[ok]    provider        selected by region",
-      "[ok]    documents       pass",
-      "[ok]    liveness        pass",
-      "[ok]    sanctions       clear (watchlists + PEP)",
-      "[done]  approved, account opened",
-    ],
-    code: `{
-  "problem": "Onboarding only worked for a single market.",
-  "built": [
-    "alternate KYC provider integrations",
-    "region-aware compliance and verification flows"
-  ],
-  "checks": ["documents", "liveness", "sanctions", "watchlists + PEP"],
-  "outcome": "global onboarding, unlocking international expansion",
-  "constraint": "live investor funds, every change audited"
-}`,
   },
   {
     folder: "projects",
@@ -931,6 +889,29 @@ export const sourceFiles: SourceFile[] = [
   },
   {
     folder: "projects",
+    name: "outlay.json",
+    cmd: "statement verify --card",
+    out: [
+      "[pdf]   password derived from the cardholder profile ...",
+      "[ok]    parsed          in memory, never written to disk",
+      "[ok]    debits          tally with the printed total",
+      "[ok]    credits         tally with the printed total",
+      "[ok]    balance         adds up to the amount due",
+      "[done]  saved with its check record",
+    ],
+    code: `{
+  "name": "Outlay",
+  "what": "an expense tracker, validator and analyser for Indian credit card statements",
+  "passwords": "14 issuer patterns, new ones learned from a password typed once",
+  "parsing": "deterministic, in memory, never written to disk",
+  "verification": "up to 13 checks, debit and credit totals tallied against the printed statement",
+  "encryption": "AES-256-GCM under a key derived per account",
+  "ai": "optional merchant re-categorisation, 2 reviews per card per month",
+  "live": "outlay-expense-tracker.vercel.app"
+}`,
+  },
+  {
+    folder: "projects",
     name: "gamenight.json",
     cmd: "npm run test:e2e",
     out: [
@@ -938,7 +919,7 @@ export const sourceFiles: SourceFile[] = [
       "[ok]    rooms           create, join, rejoin",
       "[ok]    snapshots       per-player, no leaked state",
       "[ok]    llm judge       injection attempts rejected",
-      "[ok]    checks          232 passed, 0 failed",
+      "[ok]    checks          568 passed, 0 failed",
       "[done]  no client trusted",
     ],
     code: `{
@@ -948,7 +929,7 @@ export const sourceFiles: SourceFile[] = [
   "client": "zero-build vanilla JS PWA, no download, no account",
   "games": 5,
   "llm": "game logic hardened against prompt injection",
-  "tests": "232 end-to-end checks on real sockets",
+  "tests": "568 end-to-end checks on real sockets",
   "live": "gamenightapp.onrender.com"
 }`,
   },
@@ -1039,26 +1020,25 @@ export const sourceFiles: SourceFile[] = [
 ];
 
 export const agentTranscript = [
-  { role: "user", text: "what has Ankit actually shipped in payments?" },
-  { role: "think", text: "Reading data.ts ..." },
-  { role: "tool", text: "grep \"billing\" src/lib/data.ts  ·  6 matches" },
-  { role: "think", text: "Cross-checking experience.json ..." },
+  { role: "user", text: "what has Ankit built?" },
+  { role: "think", text: "Listing projects ..." },
+  { role: "tool", text: "ls projects  ·  4 files" },
   {
     role: "agent",
-    text: "He owns the monetization stack at TechPassport. Stripe, subscription management and the billing schema, built from zero.",
+    text: "A Solana terminal that settles on mainnet, Outlay for credit card statements, Game Night for real-time party games, and Investor Copilot for private markets. All live, with more on GitHub.",
   },
   { role: "user", text: "and the latency number?" },
-  { role: "think", text: "Fetching the case study ..." },
+  { role: "think", text: "Reading the work history ..." },
   { role: "tool", text: "read work/experience.json" },
   {
     role: "agent",
-    text: "75 to 80% off the critical endpoints. Caching, query shape, async refactoring on the hot paths.",
+    text: "75 to 80% off the critical endpoints at TechPassport. Caching, query optimization and async refactoring.",
   },
   { role: "think", text: "Anything on leadership?" },
   { role: "tool", text: "read teaching/mentorship.json" },
   {
     role: "agent",
-    text: "Two squads without a PM, inside a 15+ member cross-functional team. 1,000+ engineers mentored.",
+    text: "Engineering Lead at Vested Finance, setting direction for 5+ engineers inside a 15+ member team. 1,000+ developers mentored.",
   },
   { role: "done", text: "Done. 3 sources cited." },
 ];

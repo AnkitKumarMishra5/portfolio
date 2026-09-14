@@ -84,7 +84,7 @@ function buildFacts() {
     `SELECTED WORK:\n${caseStudies
       .map((c) => `- ${c.title} at ${c.where}. ${c.did} Outcome: ${c.outcome}`)
       .join("\n")}`,
-    `SIDE PROJECTS (a selection, not the full list, more at ${person.github}):\n${projects
+    `FEATURED PROJECTS (a selection, not the full list; more at ${person.github}):\n${projects
       .map(
         (p) =>
           `- ${p.name} (${p.live}): ${p.summary} ${p.detail.join(" ")} Stack: ${p.stack.join(", ")}.`

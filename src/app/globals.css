@@ -113,7 +113,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -400,7 +399,8 @@ body {
 .theme-icon-dark,
 .theme-icon-light {
   grid-area: 1 / 1;
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    rotate 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 :root[data-theme="dark"] .theme-icon-light,
 :root[data-theme="light"] .theme-icon-dark {
@@ -702,6 +702,43 @@ body {
   mask-composite: intersect;
 }
 
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+}
+
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+  animation-play-state: paused !important;
+}
+
+html.theme-switching body.grain::after {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .blob,
+  .tex-glow {
+    filter: none;
+    will-change: auto;
+  }
+  .tex-glow {
+    animation: none;
+  }
+  .glass {
+    background: color-mix(in oklab, var(--surface) 94%, transparent);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  [style*="blur("] {
+    filter: none !important;
+  }
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -709,12 +746,36 @@ body {
 }
 
 ::view-transition-new(root) {
-  z-index: 2;
+  z-index: 1;
 }
 
-.theme-fade,
-.theme-fade *,
-.theme-fade *::before,
-.theme-fade *::after {
-  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease, fill 0.5s ease, stroke 0.5s ease, box-shadow 0.5s ease !important;
+[data-theme-toggle] {
+  view-transition-name: theme-toggle;
+}
+
+::view-transition-group(theme-toggle) {
+  z-index: 3;
+  animation-duration: 900ms;
+}
+
+::view-transition-old(theme-toggle) {
+  animation: theme-toggle-out 420ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+::view-transition-new(theme-toggle) {
+  animation: theme-toggle-in 620ms cubic-bezier(0.16, 1, 0.3, 1) 240ms both;
+}
+
+@keyframes theme-toggle-out {
+  to {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.55);
+  }
+}
+
+@keyframes theme-toggle-in {
+  from {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.55);
+  }
 }

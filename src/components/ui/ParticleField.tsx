@@ -44,17 +44,28 @@ export function ParticleField({ className = "" }: { className?: string }) {
       }));
     };
 
-    const accent = () =>
+    const readAccent = () =>
       getComputedStyle(document.documentElement)
         .getPropertyValue("--accent")
-        .trim() || "#c3f53c";
+        .trim() || "#2d69fd";
+    let color = readAccent();
+    const themeObserver = new MutationObserver(() => {
+      color = readAccent();
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
 
     const draw = () => {
+      if (!visible) {
+        raf = 0;
+        return;
+      }
       raf = requestAnimationFrame(draw);
-      if (!visible) return;
+      if (document.documentElement.classList.contains("theme-switching")) return;
 
       ctx.clearRect(0, 0, w, h);
-      const color = accent();
 
       for (const n of nodes) {
         n.x += n.vx;
@@ -116,13 +127,14 @@ export function ParticleField({ className = "" }: { className?: string }) {
     const io = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
+        if (visible && !raf) raf = requestAnimationFrame(draw);
       },
       { threshold: 0 }
     );
     io.observe(canvas);
 
     resize();
-    draw();
+    raf = requestAnimationFrame(draw);
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", onPointer, { passive: true });
     window.addEventListener("pointerleave", onLeave);
@@ -130,6 +142,7 @@ export function ParticleField({ className = "" }: { className?: string }) {
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
+      themeObserver.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onPointer);
       window.removeEventListener("pointerleave", onLeave);

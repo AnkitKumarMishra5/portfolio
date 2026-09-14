@@ -9,6 +9,11 @@ import { Reveal } from "../ui/Reveal";
 import { SectionTexture } from "../ui/SectionTexture";
 import { LogStream } from "../ui/LogStream";
 
+const CARD_WIDTH = 440;
+const CARD_GAP = 20;
+const TRACK_FIXED =
+  caseStudies.length * CARD_WIDTH + (caseStudies.length - 1) * CARD_GAP + 96 + 96;
+
 function Card({
   item,
   index,
@@ -133,7 +138,7 @@ export function Work() {
         ref={wrapRef}
         className="relative hidden md:block"
         // One viewport to pin, plus the horizontal distance to travel.
-        style={{ height: `calc(100vh + ${distance}px)` }}
+        style={{ height: `calc(100vh + max(0px, max(1.5rem, (100vw - 72rem) / 2) + ${TRACK_FIXED}px - 100vw))` }}
       >
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
           <motion.div

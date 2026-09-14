@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { navLinks, person, projects } from "@/lib/data";
 import { IconCheck, IconSearch } from "./ui/Icons";
 import { trackAction } from "./Analytics";
-import { toggleThemeFromButton } from "@/lib/theme";
+import { toggleTheme } from "@/lib/theme";
 
 type Item = {
   id: string;
@@ -123,7 +123,7 @@ export function CommandPalette() {
         group: "Settings",
         run: () => {
           setOpen(false);
-          window.setTimeout(toggleThemeFromButton, 180);
+          window.setTimeout(toggleTheme, 180);
         },
       },
     ];

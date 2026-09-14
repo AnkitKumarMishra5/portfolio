@@ -71,9 +71,9 @@ ${caseStudies
   )
   .join("\n\n")}
 
-## Side projects
+## Featured projects
 
-A selection of the ones worth reading about. More repositories at ${person.github}.
+A selection of featured projects. More at ${person.github}.
 
 ${projects
   .map(

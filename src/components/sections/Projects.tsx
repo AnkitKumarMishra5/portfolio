@@ -200,10 +200,10 @@ export function Projects() {
       />
       <SectionHeading
         index="04"
-        kicker="Side projects"
+        kicker="Featured projects"
         title="Things I built"
         accent="on my own time."
-        intro="Solo builds, all live and open source. Each one exists to answer a question I could not answer by reading about it."
+        intro="Featured builds, each one live and open source, with more on GitHub. Each exists to answer a question I could not answer by reading about it."
       />
 
       <div className="mt-16 flex flex-col gap-24 sm:gap-32">
