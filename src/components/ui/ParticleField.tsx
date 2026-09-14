@@ -44,13 +44,17 @@ export function ParticleField({ className = "" }: { className?: string }) {
       }));
     };
 
-    const readAccent = () =>
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--accent")
-        .trim() || "#2d69fd";
-    let color = readAccent();
+    const readColors = () => {
+      const root = document.documentElement;
+      const styles = getComputedStyle(root);
+      const dark = root.getAttribute("data-theme") !== "light";
+      const accent = styles.getPropertyValue("--accent").trim() || "#2d69fd";
+      const ink = styles.getPropertyValue("--accent-ink").trim() || accent;
+      return { dot: accent, line: dark ? ink : accent, boost: dark ? 1.6 : 1 };
+    };
+    let { dot: color, line: lineColor, boost } = readColors();
     const themeObserver = new MutationObserver(() => {
-      color = readAccent();
+      ({ dot: color, line: lineColor, boost } = readColors());
     });
     themeObserver.observe(document.documentElement, {
       attributes: true,
@@ -88,9 +92,9 @@ export function ParticleField({ className = "" }: { className?: string }) {
           ctx.beginPath();
           ctx.moveTo(n.x, n.y);
           ctx.lineTo(pointer.x, pointer.y);
-          ctx.strokeStyle = color;
-          ctx.globalAlpha = (1 - dist / 170) * 0.42;
-          ctx.lineWidth = 0.8;
+          ctx.strokeStyle = lineColor;
+          ctx.globalAlpha = Math.min(1, (0.12 + (1 - dist / 170) * 0.4) * boost);
+          ctx.lineWidth = 0.9;
           ctx.stroke();
         }
       }
@@ -105,9 +109,9 @@ export function ParticleField({ className = "" }: { className?: string }) {
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = color;
-          ctx.globalAlpha = (1 - d / 108) * 0.15;
-          ctx.lineWidth = 0.7;
+          ctx.strokeStyle = lineColor;
+          ctx.globalAlpha = (1 - d / 108) * 0.15 * boost;
+          ctx.lineWidth = 0.75;
           ctx.stroke();
         }
       }

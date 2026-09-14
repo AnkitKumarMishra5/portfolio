@@ -75,6 +75,11 @@ export const about: string[] = [
   "Outside work I build with LLMs (tool calling, RAG, agents, MCP) and have mentored 1,000+ developers as a Subject Matter Expert.",
 ];
 
+export const resumeAbout: string[] = [
+  "I'm Ankit Kumar Mishra, an Engineering Lead and Full-Stack Engineer building systems that move money and verify people: payments, billing, KYC and compliance, and the infrastructure underneath them.",
+  ...about.slice(1),
+];
+
 type Stat = {
   value?: number;
   display?: string;
@@ -381,11 +386,11 @@ export const projects: Project[] = [
     year: "2026",
     shot: "/shots/outlay.jpg",
     shotAlt:
-      "The Outlay dashboard: a month selector above eight cards ranked by what they billed this cycle, headline totals for due, spends and credits, a bills panel showing five of eight settled with the amount still outstanding, a chart of how the bill built up day by day and a category split donut",
+      "The Outlay dashboard: a statement month selector above twelve cards ranked by what is still due, settled ones stamped, headline totals showing total due as spends less refunds and cashbacks plus anything carried over, a bills panel showing five of eight settled with the amount still outstanding, how the bill built up date by date and a category split donut",
     shotMobile: "/shots/outlay-mobile.jpg",
     shotMobileLabel: "the whole wallet, in a pocket",
     shotMobileAlt:
-      "Outlay on a phone: the month selector, the card with the largest bill outstanding, and the rest of the wallet ranked by what each card is due, with amounts and due dates",
+      "Outlay on a phone: the statement month selector, the card with the largest bill still due, and the rest of the wallet ranked by what each card owes, with amounts, due dates and each card's share of spends",
   },
   {
     name: "Game Night",

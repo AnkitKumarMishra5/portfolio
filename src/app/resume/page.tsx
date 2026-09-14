@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  about,
   awards,
   education,
   experience,
   person,
   projects,
+  resumeAbout,
   skillGroups,
   teaching,
 } from "@/lib/data";
@@ -23,8 +23,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `Resume | ${person.name}`,
-    description: person.shortBio,
+    description: `${person.headline}. Payments, billing, KYC and compliance, API performance, and LLM systems across FinTech and RegTech.`,
     url: `${SITE_URL}/resume`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: person.xHandle,
+    creator: person.xHandle,
+    title: `Resume | ${person.name}`,
+    description: `${person.headline}. Payments, billing, KYC and compliance, API performance, and LLM systems across FinTech and RegTech.`,
   },
 };
 
@@ -111,7 +118,7 @@ export default function ResumePage() {
 
       <Block title="Summary">
         <div className="space-y-4">
-          {about.map((p, i) => (
+          {resumeAbout.map((p, i) => (
             <p key={i} className="text-pretty text-[15px] leading-[1.7] text-ink-2">
               {p}
             </p>
