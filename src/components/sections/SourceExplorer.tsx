@@ -208,7 +208,7 @@ function AgentPanel({ className = "" }: { className?: string }) {
           e.preventDefault();
           ask(draft);
         }}
-        className="flex items-center gap-2 border-t border-line px-3 py-2"
+        className="flex items-center gap-2 border-t border-line px-3 py-2 transition-colors focus-within:border-accent/60 focus-within:bg-accent/5"
       >
         <span className="mono text-[11px] text-accent-ink" aria-hidden>
           ❯
