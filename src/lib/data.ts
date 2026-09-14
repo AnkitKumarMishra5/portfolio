@@ -38,13 +38,11 @@ export const person = {
   linkedinHandle: "ankitkumarmishra",
   github: "https://github.com/AnkitKumarMishra5",
   githubHandle: "AnkitKumarMishra5",
-  x: "https://x.com/ankitkm_x",
-  xHandle: "@ankitkm_x",
   resume: "/AnkitKumarMishraResume.pdf",
   photo: "/ankit.jpg",
 } as const;
 
-export const profiles = [person.linkedin, person.github, person.x] as const;
+export const profiles = [person.linkedin, person.github] as const;
 
 const industries = ["FinTech", "RegTech", "EdTech", "MediaTech"];
 
@@ -69,14 +67,14 @@ export const positioning =
   "I own systems end to end: schema design, API contracts, third-party integrations, performance work, and the on-call that follows. Most of it has been in regulated environments where every change is audited, so I default to idempotent writes, explicit state transitions, structured logging, and tests that prove the numbers reconcile. The same defaults hold whether the system moves money, streams game state, or calls a model.";
 
 export const about: string[] = [
-  "I'm Ankit Kumar Mishra, an Engineering Lead and Full-Stack Engineer with 7+ years building systems that move money and verify people: payments, billing, KYC and compliance, and the infrastructure underneath them.",
+  "I'm Ankit Kumar Mishra, an Engineering Lead and Full-Stack Engineer with 7+ years building production systems in FinTech and RegTech: KYC and compliance, payments, API performance, and LLM applications.",
   "I'm a Staff Software Engineer at TechPassport, a London RegTech platform, where I own the monetization stack end to end. I built it from scratch: Stripe integration, subscription management, and the full billing schema. I also cut API response times by 75 to 80% across the platform's critical endpoints, and I run the design-to-engineering pipeline in Figma, shipping features from concept to production.",
   "Before that I spent two years at Vested Finance, an investment platform handling live investor funds. I joined as a Software Engineer and was promoted twice in 12 months to Engineering Lead, running the KYC/Compliance and Premium Management squads as de facto product owner. We took onboarding from a single market to global users and unified subscription billing across Stripe, Razorpay, Google Play, and Apple in-app purchases.",
   "Outside work I build with LLMs (tool calling, RAG, agents, MCP) and have mentored 1,000+ developers as a Subject Matter Expert.",
 ];
 
 export const resumeAbout: string[] = [
-  "I'm Ankit Kumar Mishra, an Engineering Lead and Full-Stack Engineer building systems that move money and verify people: payments, billing, KYC and compliance, and the infrastructure underneath them.",
+  "I'm Ankit Kumar Mishra, an Engineering Lead and Full-Stack Engineer building production systems in FinTech and RegTech: KYC and compliance, payments, API performance, and LLM applications.",
   ...about.slice(1),
 ];
 

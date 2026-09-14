@@ -29,7 +29,6 @@ ${person.headline}. ${person.role} at ${person.company} (${person.companyLocatio
 - Email: ${person.email}
 - LinkedIn: ${person.linkedin}
 - GitHub: ${person.github}
-- X: ${person.x}
 - Resume (PDF): ${SITE_URL}${person.resume}
 - Resume (HTML): ${SITE_URL}/resume
 - Privacy: ${SITE_URL}/privacy

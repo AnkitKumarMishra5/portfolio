@@ -28,8 +28,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: person.xHandle,
-    creator: person.xHandle,
     title: `Resume | ${person.name}`,
     description: `${person.headline}. FinTech, RegTech, KYC and compliance, payments, API performance and LLM systems.`,
   },
