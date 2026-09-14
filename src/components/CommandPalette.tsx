@@ -190,7 +190,7 @@ export function CommandPalette() {
         className="hidden items-center gap-2 rounded-full border border-line-2 bg-surface/50 px-3 py-2 text-[12px] text-ink-3 backdrop-blur-md transition-colors hover:border-line-3 hover:text-ink-2 lg:inline-flex"
       >
         <IconSearch className="size-3.5" />
-        <span>Quick nav</span>
+        <span className="xl:hidden">Quick nav</span>
         <kbd className="mono rounded border border-line-2 bg-surface-3/70 px-1.5 py-0.5 text-[10px] text-ink-3">
           ⌘K
         </kbd>

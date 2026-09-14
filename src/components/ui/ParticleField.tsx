@@ -81,7 +81,7 @@ export function ParticleField({ className = "" }: { className?: string }) {
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
         ctx.fillStyle = color;
-        ctx.globalAlpha = near ? 0.55 : 0.16;
+        ctx.globalAlpha = near ? 0.7 : 0.24;
         ctx.fill();
 
         if (near) {
@@ -89,8 +89,8 @@ export function ParticleField({ className = "" }: { className?: string }) {
           ctx.moveTo(n.x, n.y);
           ctx.lineTo(pointer.x, pointer.y);
           ctx.strokeStyle = color;
-          ctx.globalAlpha = (1 - dist / 170) * 0.28;
-          ctx.lineWidth = 0.7;
+          ctx.globalAlpha = (1 - dist / 170) * 0.42;
+          ctx.lineWidth = 0.8;
           ctx.stroke();
         }
       }
@@ -106,8 +106,8 @@ export function ParticleField({ className = "" }: { className?: string }) {
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
           ctx.strokeStyle = color;
-          ctx.globalAlpha = (1 - d / 108) * 0.09;
-          ctx.lineWidth = 0.6;
+          ctx.globalAlpha = (1 - d / 108) * 0.15;
+          ctx.lineWidth = 0.7;
           ctx.stroke();
         }
       }

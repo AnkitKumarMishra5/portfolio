@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 export function Aurora() {
+  const still = useMediaQuery("(pointer: coarse)");
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
       <motion.div
@@ -15,7 +17,7 @@ export function Aurora() {
           background:
             "radial-gradient(circle, color-mix(in oklab, var(--accent) 26%, transparent), transparent 68%)",
         }}
-        animate={{ x: [0, 90, -30, 0], y: [0, 60, 110, 0], scale: [1, 1.12, 0.95, 1] }}
+        animate={still ? { x: 0, y: 0, scale: 1 } : { x: [0, 90, -30, 0], y: [0, 60, 110, 0], scale: [1, 1.12, 0.95, 1] }}
         transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
@@ -28,7 +30,7 @@ export function Aurora() {
           background:
             "radial-gradient(circle, color-mix(in oklab, var(--violet) 34%, transparent), transparent 68%)",
         }}
-        animate={{ x: [0, -80, 40, 0], y: [0, 90, -40, 0], scale: [1, 0.92, 1.14, 1] }}
+        animate={still ? { x: 0, y: 0, scale: 1 } : { x: [0, -80, 40, 0], y: [0, 90, -40, 0], scale: [1, 0.92, 1.14, 1] }}
         transition={{ duration: 31, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
@@ -41,7 +43,7 @@ export function Aurora() {
           background:
             "radial-gradient(circle, color-mix(in oklab, var(--cyan) 22%, transparent), transparent 70%)",
         }}
-        animate={{ x: [0, 60, -70, 0], y: [0, -50, 30, 0] }}
+        animate={still ? { x: 0, y: 0, scale: 1 } : { x: [0, 60, -70, 0], y: [0, -50, 30, 0] }}
         transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
       />
     </div>
