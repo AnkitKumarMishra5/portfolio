@@ -1,44 +1,44 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import type { CSSProperties } from "react";
+import { person } from "@/lib/data";
 
-export const MARK_BG = "#2d69fd";
-export const MARK_FG = "#ffffff";
+export const MARK_BG = "#0a0f1b";
+
+export async function photoSrc() {
+  const data = await readFile(join(process.cwd(), "public", person.photo.replace(/^\//, "")));
+  return `data:image/jpeg;base64,${data.toString("base64")}`;
+}
 
 export function Mark({
   size,
+  src,
   padding = 0,
-  radius = 0.22,
+  background = "transparent",
 }: {
   size: number;
+  src: string;
   padding?: number;
-  radius?: number;
+  background?: string;
 }) {
-  const inset = Math.round(size * padding);
-  const box = size - inset * 2;
+  const box = size - Math.round(size * padding) * 2;
   const outer: CSSProperties = {
     width: "100%",
     height: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: padding ? MARK_BG : "transparent",
-  };
-  const inner: CSSProperties = {
-    width: box,
-    height: box,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: MARK_BG,
-    color: MARK_FG,
-    borderRadius: Math.round(box * radius),
-    fontSize: Math.round(box * 0.47),
-    fontWeight: 700,
-    letterSpacing: "-0.06em",
-    fontFamily: "sans-serif",
+    background,
   };
   return (
     <div style={outer}>
-      <div style={inner}>AK</div>
+      <img
+        src={src}
+        width={box}
+        height={box}
+        alt=""
+        style={{ width: box, height: box, borderRadius: Math.round(box * 0.22), objectFit: "cover" }}
+      />
     </div>
   );
 }
